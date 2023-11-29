@@ -15,6 +15,9 @@
 		<link
 			href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200;300;400;500;600&display=swap"
 			rel="stylesheet" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 		<link
 			href="/dist/output.css"
 			rel="stylesheet"
@@ -22,19 +25,29 @@
 		<title>Les Petits Plats</title>
 	</head>
 	<body class="font-sans">
-		<header class="p-10 w-screen h-auto md:h-[calc(100vh-15vh)] bg-heroBackground bg-cover bg-no-repeat bg-bottom-hero-bg">
+		<header
+			class="p-10 w-screen h-auto md:h-[calc(100vh-15vh)] bg-heroBackground bg-cover bg-no-repeat bg-bottom-hero-bg">
 			<img
 				src="assets/images/logo.svg"
 				alt="" />
 			<div class="w-full flex flex-col items-center mt-28 md:mt-36">
 				<h1 class="font-anton text-center text-primary text-5xl uppercase leading-relaxed max-w-3xl">
-                    Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses
+					Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses
 				</h1>
-				<input
-					class="w-full max-w-4xl h-16 mt-7 py-4 px-7 rounded-xl outline-0"
-                    placeholder="Rechercher une recette, un ingrédient, ..."
-					type="text" />
-			</div>
-		</header>
+				<div class="w-full max-w-4xl  mt-7 relative">
+					<input
+						class="w-full h-16 py-4 px-7 rounded-xl outline-0"
+						placeholder="Rechercher une recette, un ingrédient, ..."
+						type="text" />
+
+                    <div class="w-11 h-11 bg-black rounded-lg absolute right-4 top-2 flex justify-center items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 28 29" fill="none">
+                            <circle cx="10" cy="10.4219" r="9.5" stroke="white"/>
+                            <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="white"/>
+                        </svg>
+                    </div>
+                </div>
+             </div>
+        </header>
 	</body>
 </html>
