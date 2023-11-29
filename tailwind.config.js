@@ -1,15 +1,24 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
 	content: ["./src/**/*.{html,js}"],
 	theme: {
-		colors: {},
+		colors: {
+			'primary': '#FFD15B'
+		},
 		fontFamily: {
-			sans: ['sans-serif'],
+			sans: ['Manrope', ...defaultTheme.fontFamily.sans],
+			anton: ['Anton', 'sans-serif'],
       		serif: ['serif'],
 		},
+		backgroundPosition: {
+			'bottom-hero-bg': '50% 80%'
+		},
 		extend: {
-			spacing: {},
-			borderRadius: {}
+			backgroundImage: {
+				heroBackground: "url('/src/assets/images/main-background.jpeg')"
+			}
 		},
 	},
 	plugins: [],
