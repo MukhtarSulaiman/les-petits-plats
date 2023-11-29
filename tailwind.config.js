@@ -7,10 +7,11 @@ module.exports = {
 		colors: {
 			'white': '#ffffff',
 			'black': '#000000',
-			'primary': '#FFD15B'
+			'primary': '#FFD15B',
+			'gray': '#EDEDED'
 		},
 		fontFamily: {
-			sans: ['Manrope', ...defaultTheme.fontFamily.sans],
+			manrope: ['Manrope', 'sans-serif'],
 			anton: ['Anton', 'sans-serif'],
       		serif: ['serif'],
 		},
