@@ -1,11 +1,40 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/dist/output.css" rel="stylesheet" type="text/css"/>
-    <title>Les Petits Plats</title>
-</head>
-<body>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com" />
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200;300;400;500;600&display=swap"
+			rel="stylesheet" />
+		<link
+			href="/dist/output.css"
+			rel="stylesheet"
+			type="text/css" />
+		<title>Les Petits Plats</title>
+	</head>
+	<body class="font-sans">
+		<header class="p-10 w-screen h-auto md:h-[calc(100vh-15vh)] bg-heroBackground bg-cover bg-no-repeat bg-bottom-hero-bg">
+			<img
+				src="assets/images/logo.svg"
+				alt="" />
+			<div class="w-full flex flex-col items-center mt-28 md:mt-36">
+				<h1 class="font-anton text-center text-primary text-5xl uppercase leading-relaxed max-w-3xl">
+                    Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses
+				</h1>
+				<input
+					class="w-full max-w-4xl h-16 mt-7 py-4 px-7 rounded-xl outline-0"
+                    placeholder="Rechercher une recette, un ingrédient, ..."
+					type="text" />
+			</div>
+		</header>
+	</body>
 </html>
