@@ -1,9 +1,10 @@
 const createRecipes = (recipe) => {
     const recipeCard = document.createElement('div');
 
-    recipeCard.classList.add('w-96', 'h-auto', 'bg-white', 'rounded-2xl', 'overflow-hidden');
+    recipeCard.classList.add('relative', 'w-96', 'h-auto', 'bg-white', 'rounded-2xl', 'overflow-hidden');
     recipeCard.innerHTML = `
         <img class="w-full h-64 object-cover" src="./assets/images/dishes/${recipe.image}" alt="">
+        <small class="absolute top-5 right-5 rounded-xl w-16 h-6 bg-primary font-light text-center leading-6">${recipe.time}min</small>
         <div class="px-5 py-6">
             <h2 class="text-lg font-anton line-clamp-1">${recipe.name}</h2>
             <div class="mt-5 h-32">
