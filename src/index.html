@@ -36,11 +36,11 @@
 				</h1>
 				<div class="w-full max-w-4xl mt-7 relative">
 					<input
-						class="w-full h-16 py-4 px-7 rounded-xl outline-0"
+						class="main-search-input w-full h-16 py-4 px-7 rounded-xl outline-0"
 						placeholder="Rechercher une recette, un ingrédient, ..."
 						type="text" />
 
-                    <div class="w-11 h-11 bg-black rounded-lg absolute right-4 top-2 flex justify-center items-center">
+                    <div class="main-search-input_search-icon w-11 h-11 bg-black rounded-lg absolute right-4 top-2 flex justify-center items-center cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 28 29" fill="none">
                             <circle cx="10" cy="10.4219" r="9.5" stroke="white"/>
                             <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="white"/>
@@ -51,6 +51,7 @@
         </header>
         <!-- main section -->
         <main class="p-10 bg-gray">
+            <!-- Recipes cards -->
             <div 
                 id="recipes-container"
                 class="recipes-container flex justify-center lg:justify-between items-start flex-wrap gap-7">

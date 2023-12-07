@@ -19,7 +19,7 @@ const createRecipes = (recipe) => {
                         `<div class="w-auto">
                              <p class="text-sm w-40 font-ligh">${ingredient.ingredient}</p>
                              <small class="opacity-40 text-sm font-light">
-                                ${ingredient.quantity ? ingredient.quantity : '' }${ingredient.unit ? ingredient.unit : '' }
+                                ${ingredient.quantity ? ingredient.quantity : '' } ${ingredient.unit ? ingredient.unit : '' }
                             </small>
                          </div>`
                     )
