@@ -55,35 +55,51 @@
              </div>
         </header>
         <!-- main section -->
-        <main class="p-10 bg-gray">
+        <main class=" p-10 bg-gray">
             <!-- Recipes filters -->
             <div class="flex justify-between items-center mb-10">
-                <div class="datalist-container relative w-48 h-auto !p-4 bg-white rounded-lg"> 
-                    <div class="flex justify-between items">
-                        <label class="block" for="ingredient">Ingédients</label>
-                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-                        </svg>
-                        <svg  class="w-6 h-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                        </svg>
-                          
+                <div class="relative w-1/2 flex justify-between items-center">
+                    <div class="datalist-container absolute top-0 z-20 relativ w-48 h-auto !p-4 bg-white transition-all duration-500 rounded-lg"> 
+                        <div class="flex justify-between items">
+                            <label class="font-medium" for="ingredient">Ingédients</label>
+                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                            </svg>
+                            <svg  class="w-6 h-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                              
+                        </div>
+                        <div class="hidden">
+                            <div class="relative mt-3 h-fit">
+                                <input class="w-full outline-none p-1 border border-gray" type="text" list="ingredients" id="ingredient" />
+                                <svg class="absolute top-3 right-3 font-light" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 28 29" fill="none">
+                                    <circle cx="10" cy="10.4219" r="9.5" stroke="gray"/>
+                                    <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="gray"/>
+                                </svg>                     
+                            </div>
+                            <ul class="mt-4 max-h-52 overflow-scroll" id="ingredients">
+                                <li class="mb-2 font-thin">editor is what goes</li>
+                                <li class="mb-2 font-thin">editor is what goes</li>
+                                <li class="mb-2 font-thin">editor is what goes</li>
+                                <li class="mb-2 font-thin">editor is what goes</li>
+                                <li class="mb-2 font-thin">editor is what goes</li>
+                                <li class="mb-2 font-thin">editor is what goes</li>
+                                <li class="mb-2 font-thin">editor is what goes</li>
+                                <li class="mb-2 font-thin">editor is what goes</li>
+                                <li class="mb-2 font-thin">editor is what goes</li>
+                                <li class="mb-2 font-thin">editor is what goes</li>
+                                <li class="mb-2 font-thin">editor is what goes</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="relative mt-3 h-fit hidden">
-                        <input class="w-full outline-none p-1 border border-gray" type="text" list="ingredients" id="ingredient" />
-                          <svg class="absolute top-3 right-3 font-light" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 28 29" fill="none">
-                            <circle cx="10" cy="10.4219" r="9.5" stroke="gray"/>
-                            <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="gray"/>
-                        </svg>                     
-                    </div>
-                    <datalist class="!absolute !appearance-none !max-h-28" id="ingredients" tabindex="3" aria-label="trier par"></datalist>
                 </div>
                 <h2 class="text-xl font-anton">150 recettes</h2>
             </div>
             <!-- Recipes cards -->
             <div 
                 id="recipes-container"
-                class="recipes-container flex justify-center lg:justify-between items-start flex-wrap gap-7">
+                class="recipes-container mt-24 flex justify-center lg:justify-between items-start flex-wrap gap-7">
             </div>
         </main>
 

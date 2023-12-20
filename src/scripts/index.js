@@ -7,10 +7,10 @@ const recipesContainer = document.getElementById('recipes-container');
 const mainSearchInputIcon = document.querySelector('.main-search-input_search-icon');
 
 const datalistContainer = document.querySelector('.datalist-container');
-const datalist = document.querySelector('.datalist-container>datalist');
+const datalist = document.querySelector('.datalist-container ul');
 const inputSearch = document.querySelector('.datalist-container input')
 
-
+// Main search function
 const mainSearch = (recipes) => {
 
     mainSearchInputIcon.addEventListener('click', (event) => {
@@ -26,13 +26,13 @@ const mainSearch = (recipes) => {
 
         recipesContainer.replaceChildren();
 
-        for (let i = 0; i < filteredRecipes.length; i++) {
-            const recipeFactory =  createFactoryRecipes(filteredRecipes[i]);
+        for (let recipe of filteredRecipes) {
+            const recipeFactory =  createFactoryRecipes(recipe);
             const recipeCard =  createRecipes(recipeFactory);
     
             recipesContainer.appendChild(recipeCard);
     
-            filters(filteredRecipes[i].ingredients);
+            filters(recipe.ingredients);
         }
     });
 
@@ -40,21 +40,14 @@ const mainSearch = (recipes) => {
 
 // Filters
 const filters = (ingredients) => {
-    // inputSearch.style.display
-    ingredients.forEach(ingredient => {
-        const option = document.createElement('option');
 
-        option.setAttribute('value', ingredient.ingredient);
-        // option.classList.add('');
-
-        datalist.appendChild(option);
-    });
-
-    datalistContainer.addEventListener('click', (event) => {
-        // datalist.parentElement.classList.toggle('datalist-collapse');
-        event.preventDefault();
-    });
 }
+
+// console.log(ingredients)
+datalistContainer.addEventListener('click', (event) => {
+    datalist.classList.toggle('h-auto')
+    datalist.parentElement.classList.toggle('!block');
+});
 
 
 const init = async () => {
