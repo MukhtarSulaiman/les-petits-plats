@@ -34,35 +34,43 @@ const mainSearch = (recipes) => {
     
             recipesContainer.appendChild(recipeCard);
     
-            filters(recipe.ingredients);
+            ingredientFilters(recipe.ingredients);
         }
     });
-
 };
 
-// Filters
-const filters = (ingredients) => {
-    // inputSearch.style.display
-    ingredients.forEach(ingredient => {
-        // const li = document.createElement('li');
+// ingredient filters
+const ingredientFilters = (recipes) => {
+    const uniqueIngredients = [];
 
-        // li.setAttribute('value', ingredient.ingredient);
-        // li.classList.add('');
+    for (let i = 0; i < recipes.length; i++) {
+        for (let j = 0; j < recipes[i].ingredients.length; j++) {
+            if (uniqueIngredients.indexOf(recipes[i].ingredients[j].ingredient) === -1) {
+                uniqueIngredients.push(recipes[i].ingredients[j].ingredient);
+            }
+        }
+    }
 
-        // datalist.appendChild(li);
-    });
+    for (let ingredient of uniqueIngredients) {
+        const li = document.createElement('li');
+
+        li.classList.add('mb-2','font-thin');
+        li.textContent = ingredient;
+
+        datalist.appendChild(li);
+    }
+
+    [iconChevronUp, iconChevronDown].map(chevronIcon => {
+        chevronIcon.addEventListener('click', (event) => {
+            // datalistContainer.classList.toggle('')
+            datalist.parentElement.classList.toggle('!block');
+            iconChevronUp.classList.toggle('hidden');
+            iconChevronDown.classList.toggle('!block');
     
-
-}
-
-[iconChevronUp, iconChevronDown].map(chevronIcon => {
-    chevronIcon.addEventListener('click', (event) => {
-        datalist.classList.toggle('h-auto');
-        iconChevronUp.classList.toggle('hidden');
-        iconChevronDown.classList.toggle('!block');
-        datalist.parentElement.classList.toggle('!block');
+        });
     });
-});
+};
+
 
 
 const init = async () => {
@@ -70,16 +78,14 @@ const init = async () => {
     const { recipes } = await fetchRecipes();
     
     recipes.forEach(recipe => {
-        const recipeFactory =  createFactoryRecipes(recipe);
-        const recipeCard =  createRecipes(recipeFactory);
+        const recipeFactory = createFactoryRecipes(recipe);
+        const recipeCard = createRecipes(recipeFactory);
 
         recipesContainer.appendChild(recipeCard);
-
-        filters(recipe.ingredients);
-
     });
 
     mainSearch(recipes);
-}
+    ingredientFilters(recipes);
+};
 
 init();
