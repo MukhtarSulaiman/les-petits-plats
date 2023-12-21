@@ -8,11 +8,9 @@ const mainSearchInput = document.querySelector('.main-search-input');
 const mainSearchInputIcon = document.querySelector('.main-search-input_search-icon');
 const mainSearchInputRemoveIcon = document.querySelector('.main-search-input_remove-icon');
 
-const datalistContainer = document.querySelector('.datalist-container');
 const iconChevronUp = document.querySelector('.datalist-container .icon-chevron-up');
 const iconChevronDown = document.querySelector('.datalist-container .icon-chevron-down');
 const datalist = document.querySelector('.datalist-container ul');
-const inputSearch = document.querySelector('.datalist-container input')
 
 // Displaying filtered elements
 const displayFilteredElements = (recipes) => {
@@ -79,6 +77,8 @@ const mainSearch = (recipes) => {
 const ingredientFilters = (recipes) => {
     const uniqueIngredients = [];
 
+    datalist.replaceChildren();
+
     for (let i = 0; i < recipes.length; i++) {
         for (let j = 0; j < recipes[i].ingredients.length; j++) {
             if (uniqueIngredients.indexOf(recipes[i].ingredients[j].ingredient) === -1) {
@@ -96,16 +96,16 @@ const ingredientFilters = (recipes) => {
         datalist.appendChild(li);
     }
 
-    [iconChevronUp, iconChevronDown].map(chevronIcon => {
-        chevronIcon.addEventListener('click', (event) => {
-            datalist.parentElement.classList.toggle('!block');
-            iconChevronUp.classList.toggle('hidden');
-            iconChevronDown.classList.toggle('!block');
-    
-        });
-    });
 };
 
+[iconChevronUp, iconChevronDown].map(chevronIcon => {
+    chevronIcon.addEventListener('click', (event) => {
+        datalist.parentElement.classList.toggle('!block');
+        iconChevronUp.classList.toggle('hidden');
+        iconChevronDown.classList.toggle('!block');
+
+    });
+});
 
 
 const init = async () => {
