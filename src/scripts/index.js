@@ -6,6 +6,7 @@ const recipesContainer = document.getElementById('recipes-container');
 
 const mainSearchInput = document.querySelector('.main-search-input');
 const mainSearchInputIcon = document.querySelector('.main-search-input_search-icon');
+const mainSearchInputRemoveIcon = document.querySelector('.main-search-input_remove-icon');
 
 const datalistContainer = document.querySelector('.datalist-container');
 const iconChevronUp = document.querySelector('.datalist-container .icon-chevron-up');
@@ -13,9 +14,33 @@ const iconChevronDown = document.querySelector('.datalist-container .icon-chevro
 const datalist = document.querySelector('.datalist-container ul');
 const inputSearch = document.querySelector('.datalist-container input')
 
+// Displaying filtered elements
+const displayFilteredElements = (recipes) => {
+    recipesContainer.replaceChildren();
+
+    for (let recipe of recipes) {
+        const recipeFactory = createFactoryRecipes(recipe);
+        const recipeCard = createRecipes(recipeFactory);
+
+        recipesContainer.appendChild(recipeCard);
+
+    }
+    ingredientFilters(recipes);
+};
+
 // Main search function
 const mainSearch = (recipes) => {
+    // listening input event on the main search input
+    mainSearchInput.addEventListener('input', (event) => {
+        if (event.target.value) {
+            mainSearchInputRemoveIcon.classList.add('!block')
+            
+        } else {
+            mainSearchInputRemoveIcon.classList.remove('!block');
+        }
+    });
 
+    // listening click event on the main search icon
     mainSearchInputIcon.addEventListener('click', (event) => {
         const mainSearchInputValue = mainSearchInput.value.toLowerCase();
 
@@ -30,26 +55,23 @@ const mainSearch = (recipes) => {
                 filteredRecipes.push(recipes[i]);
             }
             else if (recipes[i].ingredients.length > 0) {  
-                for (let j = 0; j < recipes[i].ingredients.length; j++) {
-                    if (recipes[i].id === recipes[j].id) {   
-                        if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(mainSearchInputValue)) {
-                            filteredRecipes.push(recipes[i]);
-                        }
+                for (let j = 0; j < recipes[i].ingredients.length; j++) {     
+                    if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(mainSearchInputValue)) {
+                        filteredRecipes.push(recipes[i]);
+                        break;
                     }
                 }
             }
         }
+        displayFilteredElements(filteredRecipes);
+    });
 
-        recipesContainer.replaceChildren();
+    // listening click evnet on the main search input remove icon
+    mainSearchInputRemoveIcon.addEventListener('click', (event) => {
+        mainSearchInput.value = '';
+        mainSearchInputRemoveIcon.classList.remove('!block');
 
-        for (let recipe of filteredRecipes) {
-            const recipeFactory =  createFactoryRecipes(recipe);
-            const recipeCard =  createRecipes(recipeFactory);
-    
-            recipesContainer.appendChild(recipeCard);
-    
-            ingredientFilters(recipe);
-        }
+        displayFilteredElements(recipes);
     });
 };
 
@@ -76,7 +98,6 @@ const ingredientFilters = (recipes) => {
 
     [iconChevronUp, iconChevronDown].map(chevronIcon => {
         chevronIcon.addEventListener('click', (event) => {
-            // datalistContainer.classList.toggle('')
             datalist.parentElement.classList.toggle('!block');
             iconChevronUp.classList.toggle('hidden');
             iconChevronDown.classList.toggle('!block');
