@@ -4,6 +4,7 @@ import { createRecipes } from "./templates/recipesElements.js";
 
 const recipesContainer = document.getElementById('recipes-container');
 
+const mainSearchInput = document.querySelector('.main-search-input');
 const mainSearchInputIcon = document.querySelector('.main-search-input_search-icon');
 
 const datalistContainer = document.querySelector('.datalist-container');
@@ -16,13 +17,26 @@ const inputSearch = document.querySelector('.datalist-container input')
 const mainSearch = (recipes) => {
 
     mainSearchInputIcon.addEventListener('click', (event) => {
-        const mainSearchInputValue = mainSearchInputIcon.previousElementSibling.value;
+        const mainSearchInputValue = mainSearchInput.value.toLowerCase();
 
         const filteredRecipes = [];
 
         for (let i = 0; i < recipes.length; i++) {
-            if (recipes[i].name.includes(mainSearchInputValue)) {
+           
+            if (recipes[i].name.toLowerCase().includes(mainSearchInputValue)) {
                 filteredRecipes.push(recipes[i]);
+            }
+            else if (recipes[i].description.toLowerCase().includes(mainSearchInputValue)) {
+                filteredRecipes.push(recipes[i]);
+            }
+            else if (recipes[i].ingredients.length > 0) {  
+                for (let j = 0; j < recipes[i].ingredients.length; j++) {
+                    if (recipes[i].id === recipes[j].id) {   
+                        if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(mainSearchInputValue)) {
+                            filteredRecipes.push(recipes[i]);
+                        }
+                    }
+                }
             }
         }
 
@@ -34,7 +48,7 @@ const mainSearch = (recipes) => {
     
             recipesContainer.appendChild(recipeCard);
     
-            ingredientFilters(recipe.ingredients);
+            ingredientFilters(recipe);
         }
     });
 };
