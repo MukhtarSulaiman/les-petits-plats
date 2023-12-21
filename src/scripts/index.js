@@ -11,6 +11,7 @@ const mainSearchInputRemoveIcon = document.querySelector('.main-search-input_rem
 const iconChevronUp = document.querySelector('.datalist-container .icon-chevron-up');
 const iconChevronDown = document.querySelector('.datalist-container .icon-chevron-down');
 const datalist = document.querySelector('.datalist-container ul');
+const totaleRecipesAvailable = document.querySelector('.totale-recipes-available');
 
 // Displaying filtered elements
 const displayFilteredElements = (recipes) => {
@@ -21,8 +22,9 @@ const displayFilteredElements = (recipes) => {
         const recipeCard = createRecipes(recipeFactory);
 
         recipesContainer.appendChild(recipeCard);
-
     }
+    totaleRecipesAvailable.firstChild.textContent = recipes.length;
+    
     ingredientFilters(recipes);
 };
 
@@ -71,6 +73,8 @@ const mainSearch = (recipes) => {
 
         displayFilteredElements(recipes);
     });
+
+    totaleRecipesAvailable.firstChild.textContent = recipes.length;
 };
 
 // ingredient filters
