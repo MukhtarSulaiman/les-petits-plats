@@ -94,12 +94,12 @@ const ingredientFilters = (recipes) => {
     for (let ingredient of uniqueIngredients) {
         const li = document.createElement('li');
 
-        li.classList.add('mb-2','font-thin');
         li.textContent = ingredient;
+        li.classList.add('p-2','rounded-lg','font-thin');
 
         datalist.appendChild(li);
     }
-
+    selectIngredients();
 };
 
 [iconChevronUp, iconChevronDown].map(chevronIcon => {
@@ -110,6 +110,18 @@ const ingredientFilters = (recipes) => {
 
     });
 });
+
+const selectIngredients = () => {
+    Array.from(datalist.children).map(element => {
+        element.addEventListener('mouseover', (event) => {
+            event.target.classList.add('bg-primary', 'cursor-pointer');
+        });
+
+        element.addEventListener('mouseleave', (event) => {
+            event.target.classList.remove('bg-primary');
+        });
+    });
+};
 
 
 const init = async () => {
