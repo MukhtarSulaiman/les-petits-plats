@@ -100,7 +100,7 @@ const ingredientFilters = (recipes) => {
 
         datalist.appendChild(li);
     }
-    selectIngredients();
+    selectIngredients(recipes);
 };
 
 [iconChevronUp, iconChevronDown].map(chevronIcon => {
@@ -112,7 +112,7 @@ const ingredientFilters = (recipes) => {
     });
 });
 
-const selectIngredients = () => {
+const selectIngredients = (recipes) => {
     Array.from(datalist.children).map(element => {
         element.addEventListener('mouseover', (event) => {
             event.target.classList.add('bg-primary', 'cursor-pointer');
@@ -140,9 +140,26 @@ const selectIngredients = () => {
 
             datalist.parentElement.classList.toggle('!block');
 
+            filterInIngredients(recipes, event.target.textContent);
             removeTags();
         });
     });
+};
+
+const filterInIngredients = (recipes, ingredientLabel) => {
+    const filteredRecipes = [];
+
+    for (let i = 0; i < recipes.length; i++) {
+        if (recipes[i].ingredients.length > 0) {  
+            for (let j = 0; j < recipes[i].ingredients.length; j++) {     
+                if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(ingredientLabel.toLowerCase())) {
+                    filteredRecipes.push(recipes[i]);
+                    break;
+                }
+            }
+        }
+    }
+    displayFilteredElements(filteredRecipes);
 };
 
 
