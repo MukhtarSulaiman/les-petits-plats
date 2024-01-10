@@ -123,9 +123,6 @@ const selectIngredients = () => {
         });
 
         element.addEventListener('click', (event) => {
-            // console.log(ingredientTagsContainer)
-            // console.log(event.target)
-
             event.target.classList.add('!list-none', '!p-0')
 
             const div = document.createElement('div');
@@ -138,13 +135,25 @@ const selectIngredients = () => {
             div.appendChild(i);
 
             div.classList.add('flex', 'justify-between', 'items-center', 'bg-primary', 'p-3', 'mb-1', 'rounded-lg');
-            ingredientTagsContainer.classList.add('w-48', 'mt-12');
 
             ingredientTagsContainer.appendChild(div);
 
             datalist.parentElement.classList.toggle('!block');
+
+            removeTags();
         });
     });
+};
+
+
+const removeTags = () => {
+    Array.from(ingredientTagsContainer.querySelectorAll('div>i')).map(icon => {
+        icon.addEventListener('click', handleRemoveTag);
+    });
+};
+
+const handleRemoveTag = (event) => {
+    event.target.parentElement.remove();
 };
 
 
