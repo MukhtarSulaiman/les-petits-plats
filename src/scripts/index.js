@@ -1,14 +1,7 @@
 import { fetchRecipes } from './utils/fetchRecipes.js';
 import { displayRecipes } from './utils/displayRecipes.js';
 import { mainSearch } from './searches/mainSearch.js';
-
-// const recipesContainer = document.getElementById('recipes-container');
-
-// const mainSearchInput = document.querySelector('.main-search-input');
-// const mainSearchInputIcon = document.querySelector('.main-search-input_search-icon');
-// const mainSearchInputRemoveIcon = document.querySelector('.main-search-input_remove-icon');
-// const ingredientsInput = document.querySelector('.datalist-container input');
-// const totaleRecipesAvailable = document.querySelector('.totale-recipes-available');
+// import { uniquifyIgredients } from './utils/uniquifyIgredients.js';
 
 const iconChevronUp = document.querySelector('.datalist-container .icon-chevron-up');
 const iconChevronDown = document.querySelector('.datalist-container .icon-chevron-down');
@@ -16,30 +9,6 @@ const datalist = document.querySelector('.datalist-container ul');
 const ingredientTagsContainer = document.getElementById('ingredient-tags-container');
 
 
-// ingredient filters
-const ingredientFilters = (recipes) => {
-	const uniqueIngredients = [];
-
-	datalist.replaceChildren();
-
-	for (let i = 0; i < recipes.length; i++) {
-		for (let j = 0; j < recipes[i].ingredients.length; j++) {
-			if (uniqueIngredients.indexOf(recipes[i].ingredients[j].ingredient) === -1) {
-				uniqueIngredients.push(recipes[i].ingredients[j].ingredient);
-			}
-		}
-	}
-
-	for (let ingredient of uniqueIngredients) {
-		const li = document.createElement('li');
-
-		li.textContent = ingredient;
-		li.classList.add('p-2', 'rounded-lg', 'font-thin');
-
-		datalist.appendChild(li);
-	}
-	selectIngredients(recipes);
-};
 
 [iconChevronUp, iconChevronDown].map((chevronIcon) => {
 	chevronIcon.addEventListener('click', (event) => {
@@ -49,11 +18,10 @@ const ingredientFilters = (recipes) => {
 	});
 });
 
-// ingredientsInput.addEventListener('inpu')
 
 let tagsList = [];
 
-const selectIngredients = (recipes) => {
+export const selectIngredients = (recipes) => {
 	Array.from(datalist.children).map((element) => {
 		element.addEventListener('mouseover', (event) => {
 			event.target.classList.add('bg-primary', 'cursor-pointer');
@@ -144,7 +112,7 @@ const init = async () => {
 
 	displayRecipes(recipes);
 	mainSearch(recipes);
-	// ingredientFilters(recipes);
+	// uniquifyIgredients(recipes);
 };
 
 init();

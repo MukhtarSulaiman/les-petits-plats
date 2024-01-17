@@ -1,6 +1,6 @@
 import { createFactoryRecipes } from './factoryRecipes.js';
 import { createRecipes } from '../templates/recipesElements.js';
-import { ingredientFilters } from './filterIngredients.js';
+import { uniquifyIgredients } from './uniquifyIgredients.js';
 
 const recipesContainer = document.getElementById('recipes-container');
 const totaleRecipesAvailable = document.querySelector('.totale-recipes-available');
@@ -17,7 +17,7 @@ const displayRecipes = (recipes) => {
     }
     totaleRecipesAvailable.firstChild.textContent = recipes.length;
     
-    ingredientFilters(recipes);
+    uniquifyIgredients(recipes);
 };
 
 export { displayRecipes };
