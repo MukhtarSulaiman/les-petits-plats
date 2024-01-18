@@ -31,8 +31,10 @@ export const selectIngredients = (recipes) => {
 			event.target.classList.remove('bg-primary');
 		});
 
-		element.addEventListener('click', (event) => {
-			event.target.classList.add('!list-none', '!p-0');
+        element.addEventListener('click', (event) => {
+            const currentTag = event.target;
+
+			currentTag.classList.add('!list-none', '!p-0');
 
 			const div = document.createElement('div');
 			const i = document.createElement('i');
@@ -40,42 +42,43 @@ export const selectIngredients = (recipes) => {
 			i.textContent = '✕';
 			i.classList.add('cursor-pointer');
 
-			div.appendChild(event.target);
+			div.appendChild(currentTag);
 			div.appendChild(i);
 
 			div.classList.add('flex', 'justify-between', 'items-center', 'bg-primary', 'p-3', 'mb-1', 'rounded-lg');
 
 			// if (tagsList.length > 0) {
 			//     for (let i = 0; i < tagsList.length; i++) {
-			// //         if (tagsList[i].toLowerCase() !== event.target.textContent.toLowerCase()) {
+			// //         if (tagsList[i].toLowerCase() !== currentTag.textContent.toLowerCase()) {
 			// //             ingredientTagsContainer.appendChild(div);
 			// //             datalist.parentElement.classList.toggle('!block');
 
 			// //         } else {
-			// //             tagsList.push(event.target.textContent);
+			// //             tagsList.push(currentTag.textContent);
 			// //             ingredientTagsContainer.appendChild(div);
 			// //             datalist.parentElement.classList.toggle('!block');
 			// //         };
 			//     }
 			// // } else {
-			// //     tagsList.push(event.target.textContent);
+			// //     tagsList.push(currentTag.textContent);
 			// //     ingredientTagsContainer.appendChild(div);
 			// //     datalist.parentElement.classList.toggle('!block');
 			// };
 
-			console.log(recipes.length);
-			tagsList.push(event.target.textContent);
+			// console.log(recipes.length);
+            tagsList.push(currentTag.textContent);
+            // console.log(tagsList)
 			ingredientTagsContainer.appendChild(div);
 			datalist.parentElement.classList.toggle('!block');
 
-			filterInIngredients(recipes, event.target.textContent, 'adding');
+            filterInIngredients(recipes, currentTag.textContent, 'adding');
 			removeTags(recipes);
 		});
 	});
 };
 
 const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
-	const filteredRecipes = [];
+    const filteredRecipes = [];
 
 	for (let i = 0; i < recipes.length; i++) {
 		if (recipes[i].ingredients.length > 0) {
@@ -99,12 +102,13 @@ const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
 
 //
 const removeTags = (recipes) => {
-	Array.from(ingredientTagsContainer.querySelectorAll('div>i')).map((icon) => {
-		icon.addEventListener('click', (event) => {
-			filterInIngredients(recipes, event.target.previousSibling.textContent, 'removing');
-			event.target.parentElement.remove();
-		});
-	});
+    // const removeTagButtons = Array.from(ingredientTagsContainer.querySelectorAll('div>i'));
+
+    // removeTagButtons.forEach((button, index) => {
+    //     ingredientTagsContainer.addEventListener('click', (event) => {
+    //         console.log(event.target.previousSibling.textContent);
+    //     });
+    // });
 };
 
 const init = async () => {
