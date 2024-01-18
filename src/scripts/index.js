@@ -1,11 +1,12 @@
 import { fetchRecipes } from './utils/fetchRecipes.js';
 import { displayRecipes } from './utils/displayRecipes.js';
 import { mainSearch } from './searches/mainSearch.js';
-// import { uniquifyIgredients } from './utils/uniquifyIgredients.js';
 
-const iconChevronUp = document.querySelector('.datalist-container .icon-chevron-up');
-const iconChevronDown = document.querySelector('.datalist-container .icon-chevron-down');
-const datalist = document.querySelector('.datalist-container ul');
+const datalistContainerIngredients = document.querySelector('.datalist-container-ingredients');
+
+const iconChevronUp = datalistContainerIngredients.querySelector('.icon-chevron-up-ingredients');
+const iconChevronDown = datalistContainerIngredients.querySelector('.icon-chevron-down-ingredients');
+const datalist = datalistContainerIngredients.querySelector('ul');
 const ingredientTagsContainer = document.getElementById('ingredient-tags-container');
 
 

@@ -1,8 +1,8 @@
 import { selectIngredients } from '../index.js'
 
-const datalistContainer = document.querySelector('.datalist-container');
-const searchInput = datalistContainer.querySelector('input');
-const datalist = datalistContainer.querySelector('ul');
+const datalistContainerIngredients = document.querySelector('.datalist-container-ingredients');
+const searchInput = datalistContainerIngredients.querySelector('input');
+const datalist = datalistContainerIngredients.querySelector('ul');
 
 // Uniquify ingredients names
 const uniquifyIgredients = (recipes) => {

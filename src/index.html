@@ -59,19 +59,20 @@
             <!-- Recipes filters -->
             <div class="flex justify-between items-center mb-10">
                 <div class="relative w-1/2 flex justify-between items-center">
-                    <div class="datalist-container absolute top-0 z-20 w-48 !p-4 bg-white rounded-lg"> 
-                        <div class="flex justify-between items">
+                    
+                    <div class="datalist-container-ingredients absolute top-0 z-20 w-48 !p-4 bg-white rounded-lg"> 
+                        <div class="flex justify-between">
                             <label class="font-medium" for="ingredient">Ingédients</label>
-                            <svg class="icon-chevron-up w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <svg class="icon-chevron-up-ingredients w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
                             </svg>
-                            <svg  class="icon-chevron-down w-6 h-6 hidden cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <svg  class="icon-chevron-down-ingredients w-6 h-6 hidden cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                             </svg>
                         </div>
                         <div class="hidden">
                             <div class="relative mt-3 h-fit">
-                                <input class="w-full outline-none p-1 border border-gray" type="text" />
+                                <input class="w-full outline-none p-1 border border-gray" type="text" id="ingredient" />
                                 <svg class="absolute top-3 right-3 font-light" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 28 29" fill="none">
                                     <circle cx="10" cy="10.4219" r="9.5" stroke="gray"/>
                                     <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="gray"/>
@@ -80,6 +81,7 @@
                             <ul class="mt-4 max-h-52 overflow-scroll" id="ingredients"></ul>
                         </div>
                     </div>
+
                 </div>
                 <h2 class="totale-recipes-available text-xl font-anton"><span>0</span> recettes</h2>
             </div>
