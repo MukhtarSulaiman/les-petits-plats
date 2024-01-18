@@ -91,14 +91,18 @@ const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
 
 //
 const removeTags = (recipes) => {
-    // const removeTagButtons = Array.from(ingredientTagsContainer.querySelectorAll('div>i'));
+    const removeTagButtons = Array.from(ingredientTagsContainer.querySelectorAll('div>i'));
+    
+    removeTagButtons[removeTagButtons.length - 1].addEventListener('click', (event) => {
+        // console.log(event.target.previousSibling.textContent);
+        // filterInIngredients(recipes, event.target.previousSibling.textContent, 'removing');
+        console.log('test....')
 
-    // removeTagButtons.forEach((button, index) => {
-    //     ingredientTagsContainer.addEventListener('click', (event) => {
-    //         console.log(event.target.previousSibling.textContent);
-    //     });
-    // });
+    });
+
 };
+
+
 //------------ Appliance section ------------------
 [iconChevronUpAppliance, iconChevronDownAppliance].map((chevronIcon) => {
 	chevronIcon.addEventListener('click', (event) => {
