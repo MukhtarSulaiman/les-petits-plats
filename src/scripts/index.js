@@ -4,18 +4,17 @@ import { mainSearch } from './searches/mainSearch.js';
 
 const datalistContainerIngredients = document.querySelector('.datalist-container-ingredients');
 
-const iconChevronUp = datalistContainerIngredients.querySelector('.icon-chevron-up-ingredients');
-const iconChevronDown = datalistContainerIngredients.querySelector('.icon-chevron-down-ingredients');
-const datalist = datalistContainerIngredients.querySelector('ul');
+const iconChevronUpIngredients = datalistContainerIngredients.querySelector('.icon-chevron-up-ingredients');
+const iconChevronDownIngredients = datalistContainerIngredients.querySelector('.icon-chevron-down-ingredients');
+const datalistIngredients = datalistContainerIngredients.querySelector('ul');
 const ingredientTagsContainer = document.getElementById('ingredient-tags-container');
 
 
-
-[iconChevronUp, iconChevronDown].map((chevronIcon) => {
+[iconChevronUpIngredients, iconChevronDownIngredients].map((chevronIcon) => {
 	chevronIcon.addEventListener('click', (event) => {
-		datalist.parentElement.classList.toggle('!block');
-		iconChevronUp.classList.toggle('hidden');
-		iconChevronDown.classList.toggle('!block');
+		datalistIngredients.parentElement.classList.toggle('!block');
+		iconChevronUpIngredients.classList.toggle('hidden');
+		iconChevronDownIngredients.classList.toggle('!block');
 	});
 });
 
@@ -23,7 +22,7 @@ const ingredientTagsContainer = document.getElementById('ingredient-tags-contain
 let tagsList = [];
 
 export const selectIngredients = (recipes) => {
-	Array.from(datalist.children).map((element) => {
+	Array.from(datalistIngredients.children).map((element) => {
 		element.addEventListener('mouseover', (event) => {
 			event.target.classList.add('bg-primary', 'cursor-pointer');
 		});
@@ -52,25 +51,25 @@ export const selectIngredients = (recipes) => {
 			//     for (let i = 0; i < tagsList.length; i++) {
 			// //         if (tagsList[i].toLowerCase() !== currentTag.textContent.toLowerCase()) {
 			// //             ingredientTagsContainer.appendChild(div);
-			// //             datalist.parentElement.classList.toggle('!block');
+			// //             datalistIngredients.parentElement.classList.toggle('!block');
 
 			// //         } else {
 			// //             tagsList.push(currentTag.textContent);
 			// //             ingredientTagsContainer.appendChild(div);
-			// //             datalist.parentElement.classList.toggle('!block');
+			// //             datalistIngredients.parentElement.classList.toggle('!block');
 			// //         };
 			//     }
 			// // } else {
 			// //     tagsList.push(currentTag.textContent);
 			// //     ingredientTagsContainer.appendChild(div);
-			// //     datalist.parentElement.classList.toggle('!block');
+			// //     datalistIngredients.parentElement.classList.toggle('!block');
 			// };
 
 			// console.log(recipes.length);
             tagsList.push(currentTag.textContent);
             // console.log(tagsList)
 			ingredientTagsContainer.appendChild(div);
-			datalist.parentElement.classList.toggle('!block');
+			datalistIngredients.parentElement.classList.toggle('!block');
 
             filterInIngredients(recipes, currentTag.textContent, 'adding');
 			removeTags(recipes);
