@@ -10,6 +10,15 @@ const datalistIngredients = datalistContainerIngredients.querySelector('ul');
 const ingredientTagsContainer = document.getElementById('ingredient-tags-container');
 
 
+const datalistContainerAppliance = document.querySelector('.datalist-container-appliance');
+
+const iconChevronUpAppliance = datalistContainerAppliance.querySelector('.icon-chevron-up-appliance');
+const iconChevronDownAppliance = datalistContainerAppliance.querySelector('.icon-chevron-down-appliance');
+const datalistAppliance = datalistContainerAppliance.querySelector('ul');
+const applianceTagsContainer = document.getElementById('appliance-tags-container');
+
+
+//---------------- Appliance section -----------------
 [iconChevronUpIngredients, iconChevronDownIngredients].map((chevronIcon) => {
 	chevronIcon.addEventListener('click', (event) => {
 		datalistIngredients.parentElement.classList.toggle('!block');
@@ -17,7 +26,6 @@ const ingredientTagsContainer = document.getElementById('ingredient-tags-contain
 		iconChevronDownIngredients.classList.toggle('!block');
 	});
 });
-
 
 let tagsList = [];
 
@@ -47,27 +55,8 @@ export const selectIngredients = (recipes) => {
 
 			div.classList.add('flex', 'justify-between', 'items-center', 'bg-primary', 'p-3', 'mb-1', 'rounded-lg');
 
-			// if (tagsList.length > 0) {
-			//     for (let i = 0; i < tagsList.length; i++) {
-			// //         if (tagsList[i].toLowerCase() !== currentTag.textContent.toLowerCase()) {
-			// //             ingredientTagsContainer.appendChild(div);
-			// //             datalistIngredients.parentElement.classList.toggle('!block');
-
-			// //         } else {
-			// //             tagsList.push(currentTag.textContent);
-			// //             ingredientTagsContainer.appendChild(div);
-			// //             datalistIngredients.parentElement.classList.toggle('!block');
-			// //         };
-			//     }
-			// // } else {
-			// //     tagsList.push(currentTag.textContent);
-			// //     ingredientTagsContainer.appendChild(div);
-			// //     datalistIngredients.parentElement.classList.toggle('!block');
-			// };
-
-			// console.log(recipes.length);
             tagsList.push(currentTag.textContent);
-            // console.log(tagsList)
+
 			ingredientTagsContainer.appendChild(div);
 			datalistIngredients.parentElement.classList.toggle('!block');
 
@@ -110,13 +99,55 @@ const removeTags = (recipes) => {
     //     });
     // });
 };
+//------------ Appliance section ------------------
+[iconChevronUpAppliance, iconChevronDownAppliance].map((chevronIcon) => {
+	chevronIcon.addEventListener('click', (event) => {
+		datalistAppliance.parentElement.classList.toggle('!block');
+		iconChevronUpAppliance.classList.toggle('hidden');
+		iconChevronDownAppliance.classList.toggle('!block');
+	});
+});
+
+export const selectAppliance = (recipes) => {
+	Array.from(datalistAppliance.children).map((element) => {
+		element.addEventListener('mouseover', (event) => {
+			event.target.classList.add('bg-primary', 'cursor-pointer');
+		});
+
+		element.addEventListener('mouseleave', (event) => {
+			event.target.classList.remove('bg-primary');
+		});
+
+        element.addEventListener('click', (event) => {
+            const currentTag = event.target;
+
+			currentTag.classList.add('!list-none', '!p-0');
+
+			const div = document.createElement('div');
+			const i = document.createElement('i');
+
+			i.textContent = '✕';
+			i.classList.add('cursor-pointer');
+
+			div.appendChild(currentTag);
+			div.appendChild(i);
+
+			div.classList.add('flex', 'justify-between', 'items-center', 'bg-primary', 'p-3', 'mb-1', 'rounded-lg');
+
+			applianceTagsContainer.appendChild(div);
+			datalistAppliance.parentElement.classList.toggle('!block');
+
+            // filterInAppliance(recipes, currentTag.textContent, 'adding');
+			// removeApplianceTags(recipes);
+		});
+	});
+};
 
 const init = async () => {
 	const {recipes} = await fetchRecipes();
 
 	displayRecipes(recipes);
 	mainSearch(recipes);
-	// uniquifyIgredients(recipes);
 };
 
 init();
