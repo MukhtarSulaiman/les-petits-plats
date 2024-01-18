@@ -1,12 +1,12 @@
 import { selectIngredients } from '../index.js'
 
-const datalist = document.querySelector('.datalist-container ul');
+const datalistContainer = document.querySelector('.datalist-container');
+const searchInput = datalistContainer.querySelector('input');
+const datalist = datalistContainer.querySelector('ul');
 
 // Uniquify ingredients names
 const uniquifyIgredients = (recipes) => {
-	const uniqueIngredients = [];
-
-	datalist.replaceChildren();
+	let uniqueIngredients = [];
 
 	for (let i = 0; i < recipes.length; i++) {
 		for (let j = 0; j < recipes[i].ingredients.length; j++) {
@@ -14,17 +14,37 @@ const uniquifyIgredients = (recipes) => {
 				uniqueIngredients.push(recipes[i].ingredients[j].ingredient);
 			}
 		}
-	}
+    }
+    displayIngredients(recipes, uniqueIngredients);
+    
+    searchInput.addEventListener('input', (event) => {
+        let temperaryUniqueIngredients = [];
 
-	for (let ingredient of uniqueIngredients) {
-		const li = document.createElement('li');
+        if (event.target.value) {
+            for (let i = 0; i < uniqueIngredients.length; i++) {
+                if (uniqueIngredients[i].toLowerCase().includes(event.target.value.toLowerCase())) {
+                    temperaryUniqueIngredients.push(uniqueIngredients[i]);
+                }
+            }
+        } else temperaryUniqueIngredients = uniqueIngredients;
+        displayIngredients(recipes, temperaryUniqueIngredients);
+    });
+};
 
-		li.textContent = ingredient;
-		li.classList.add('p-2', 'rounded-lg', 'font-thin');
+// Display ingredients
+const displayIngredients = (recipes, uniqueIngredients) => {
+    datalist.replaceChildren();
 
-		datalist.appendChild(li);
-	}
-	selectIngredients(recipes);
+    for (let ingredient of uniqueIngredients) {
+        const li = document.createElement('li');
+
+        li.textContent = ingredient;
+        li.classList.add('p-2', 'rounded-lg', 'font-thin');
+
+        datalist.appendChild(li);
+    }
+
+    selectIngredients(recipes);
 };
 
 export { uniquifyIgredients };
