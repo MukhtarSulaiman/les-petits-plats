@@ -5,15 +5,15 @@ const searchInput = datalistContainerAppliance.querySelector('input');
 const datalist = datalistContainerAppliance.querySelector('ul');
 
 // Uniquify appliance names
-const uniquifyAppliance = (appliance) => {
+const uniquifyAppliance = (recipes) => {
 	let uniqueAppliance = [];
 
-	for (let i = 0; i < appliance.length; i++) {
-        if (uniqueAppliance.indexOf(appliance[i].appliance) === -1) {
-            uniqueAppliance.push(appliance[i].appliance);
+	for (let i = 0; i < recipes.length; i++) {
+        if (uniqueAppliance.indexOf(recipes[i].appliance) === -1) {
+            uniqueAppliance.push(recipes[i].appliance);
         }
     }
-    displayAppliance(appliance, uniqueAppliance);
+    displayAppliance(recipes, uniqueAppliance);
     
     searchInput.addEventListener('input', (event) => {
         let temperaryUniqueAppliance = [];
@@ -25,12 +25,12 @@ const uniquifyAppliance = (appliance) => {
                 }
             }
         } else temperaryUniqueAppliance = uniqueAppliance;
-        displayAppliance(appliance, temperaryUniqueAppliance);
+        displayAppliance(recipes, temperaryUniqueAppliance);
     });
 };
 
 // Display appliance
-const displayAppliance = (appliance, uniqueAppliance) => {
+const displayAppliance = (recipes, uniqueAppliance) => {
     datalist.replaceChildren();
 
     for (let ingredient of uniqueAppliance) {
