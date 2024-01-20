@@ -1,5 +1,3 @@
-
-
 const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsContainer) => {
     Array.from(datalistElement.children).map((element) => {
         // console.log(datalistElement)

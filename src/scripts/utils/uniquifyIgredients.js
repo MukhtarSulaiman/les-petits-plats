@@ -1,8 +1,9 @@
-import { selectIngredients } from '../index.js'
+import { selectIngredientsApplianceOrUstensils } from './selectIngredientsApplianceOrUstensils.js'
 
 const datalistContainerIngredients = document.querySelector('.datalist-container-ingredients');
 const searchInput = datalistContainerIngredients.querySelector('input');
-const datalist = datalistContainerIngredients.querySelector('ul');
+const datalistIngredients = datalistContainerIngredients.querySelector('ul');
+const ingredientTagsContainer = document.getElementById('ingredient-tags-container');
 
 // Uniquify ingredients names
 const uniquifyIgredients = (recipes) => {
@@ -33,7 +34,7 @@ const uniquifyIgredients = (recipes) => {
 
 // Display ingredients
 const displayIngredients = (recipes, uniqueIngredients) => {
-    datalist.replaceChildren();
+    datalistIngredients.replaceChildren();
 
     for (let ingredient of uniqueIngredients) {
         const li = document.createElement('li');
@@ -41,10 +42,10 @@ const displayIngredients = (recipes, uniqueIngredients) => {
         li.textContent = ingredient;
         li.classList.add('p-2', 'rounded-lg', 'font-thin');
 
-        datalist.appendChild(li);
+        datalistIngredients.appendChild(li);
     }
 
-    selectIngredients(recipes);
+    selectIngredientsApplianceOrUstensils(recipes, datalistIngredients, ingredientTagsContainer);
 };
 
 export { uniquifyIgredients };

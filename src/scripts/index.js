@@ -26,46 +26,7 @@ const datalistAppliance = datalistContainerAppliance.querySelector('ul');
 	});
 });
 
-let tagsList = [];
-
-export const selectIngredients = (recipes) => {
-	Array.from(datalistIngredients.children).map((element) => {
-		element.addEventListener('mouseover', (event) => {
-			event.target.classList.add('bg-primary', 'cursor-pointer');
-		});
-
-		element.addEventListener('mouseleave', (event) => {
-			event.target.classList.remove('bg-primary');
-		});
-
-        element.addEventListener('click', (event) => {
-            const currentTag = event.target;
-
-			currentTag.classList.add('!list-none', '!p-0');
-
-			const div = document.createElement('div');
-			const i = document.createElement('i');
-
-			i.textContent = '✕';
-			i.classList.add('cursor-pointer');
-
-			div.appendChild(currentTag);
-			div.appendChild(i);
-
-			div.classList.add('flex', 'justify-between', 'items-center', 'bg-primary', 'p-3', 'mb-1', 'rounded-lg');
-
-            tagsList.push(currentTag.textContent);
-
-			ingredientTagsContainer.appendChild(div);
-			datalistIngredients.parentElement.classList.toggle('!block');
-
-            filterInIngredients(recipes, currentTag.textContent, 'adding');
-			removeTags(recipes);
-        });
-	});
-};
-
-const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
+export const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
     const filteredRecipes = [];
 
 	for (let i = 0; i < recipes.length; i++) {
@@ -89,7 +50,7 @@ const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
 };
 
 //
-const removeTags = (recipes) => {
+export const removeTags = (recipes) => {
     const removeTagButtons = Array.from(ingredientTagsContainer.querySelectorAll('div>i'));
     
     removeTagButtons[removeTagButtons.length - 1].addEventListener('click', (event) => {
