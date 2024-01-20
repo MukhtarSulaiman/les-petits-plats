@@ -15,7 +15,6 @@ const datalistContainerAppliance = document.querySelector('.datalist-container-a
 const iconChevronUpAppliance = datalistContainerAppliance.querySelector('.icon-chevron-up-appliance');
 const iconChevronDownAppliance = datalistContainerAppliance.querySelector('.icon-chevron-down-appliance');
 const datalistAppliance = datalistContainerAppliance.querySelector('ul');
-const applianceTagsContainer = document.getElementById('appliance-tags-container');
 
 
 //---------------- Appliance section -----------------
@@ -62,7 +61,7 @@ export const selectIngredients = (recipes) => {
 
             filterInIngredients(recipes, currentTag.textContent, 'adding');
 			removeTags(recipes);
-		});
+        });
 	});
 };
 
@@ -111,41 +110,6 @@ const removeTags = (recipes) => {
 		iconChevronDownAppliance.classList.toggle('!block');
 	});
 });
-
-export const selectAppliance = (recipes) => {
-	Array.from(datalistAppliance.children).map((element) => {
-		element.addEventListener('mouseover', (event) => {
-			event.target.classList.add('bg-primary', 'cursor-pointer');
-		});
-
-		element.addEventListener('mouseleave', (event) => {
-			event.target.classList.remove('bg-primary');
-		});
-
-        element.addEventListener('click', (event) => {
-            const currentTag = event.target;
-
-			currentTag.classList.add('!list-none', '!p-0');
-
-			const div = document.createElement('div');
-			const i = document.createElement('i');
-
-			i.textContent = '✕';
-			i.classList.add('cursor-pointer');
-
-			div.appendChild(currentTag);
-			div.appendChild(i);
-
-			div.classList.add('flex', 'justify-between', 'items-center', 'bg-primary', 'p-3', 'mb-1', 'rounded-lg');
-
-			applianceTagsContainer.appendChild(div);
-			datalistAppliance.parentElement.classList.toggle('!block');
-
-            // filterInAppliance(recipes, currentTag.textContent, 'adding');
-			// removeApplianceTags(recipes);
-		});
-	});
-};
 
 const init = async () => {
 	const {recipes} = await fetchRecipes();

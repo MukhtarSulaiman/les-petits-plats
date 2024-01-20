@@ -1,8 +1,10 @@
-import { selectAppliance } from '../index.js'
+import { selectIngredientsApplianceOrUstensils } from './selectIngredientsApplianceOrUstensils.js'
 
 const datalistContainerAppliance = document.querySelector('.datalist-container-appliance');
 const searchInput = datalistContainerAppliance.querySelector('input');
-const datalist = datalistContainerAppliance.querySelector('ul');
+const datalistAppliance = datalistContainerAppliance.querySelector('ul');
+const applianceTagsContainer = document.getElementById('appliance-tags-container');
+
 
 // Uniquify appliance names
 const uniquifyAppliance = (recipes) => {
@@ -31,7 +33,7 @@ const uniquifyAppliance = (recipes) => {
 
 // Display appliance
 const displayAppliance = (recipes, uniqueAppliance) => {
-    datalist.replaceChildren();
+    datalistAppliance.replaceChildren();
 
     for (let ingredient of uniqueAppliance) {
         const li = document.createElement('li');
@@ -39,10 +41,10 @@ const displayAppliance = (recipes, uniqueAppliance) => {
         li.textContent = ingredient;
         li.classList.add('p-2', 'rounded-lg', 'font-thin');
 
-        datalist.appendChild(li);
+        datalistAppliance.appendChild(li);
     }
 
-    selectAppliance(appliance);
+    selectIngredientsApplianceOrUstensils(recipes, datalistAppliance, applianceTagsContainer);
 };
 
 export { uniquifyAppliance };
