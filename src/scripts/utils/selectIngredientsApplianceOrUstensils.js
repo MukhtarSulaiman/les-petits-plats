@@ -1,7 +1,7 @@
+import { filterInIngredients, removeTags, tagsList } from '../index.js';
+
 const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsContainer) => {
     Array.from(datalistElement.children).map((element) => {
-        // console.log(datalistElement)
-        // console.log(tagsContainer)
 
 
 		element.addEventListener('mouseover', (event) => {
@@ -27,12 +27,16 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 			div.appendChild(i);
 
 			div.classList.add('flex', 'justify-between', 'items-center', 'bg-primary', 'p-3', 'mb-1', 'rounded-lg');
+            
+            if (!tagsList.includes(currentTag.textContent)) {
+                tagsList.push(currentTag.textContent);
+			    tagsContainer.appendChild(div);
+            }
 
-			tagsContainer.appendChild(div);
 			datalistElement.parentElement.classList.toggle('!block');
 
-            // filterInAppliance(recipes, currentTag.textContent, 'adding');
-            // removeApplianceTags(recipes);
+            filterInIngredients(recipes, currentTag.textContent, 'adding');
+            removeTags(recipes);
 		});
 	});
 };
