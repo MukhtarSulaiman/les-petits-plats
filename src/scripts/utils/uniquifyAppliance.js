@@ -44,7 +44,7 @@ const displayAppliance = (recipes, uniqueAppliance) => {
         datalistAppliance.appendChild(li);
     }
 
-    selectIngredientsApplianceOrUstensils(recipes, datalistAppliance, applianceTagsContainer);
+    selectIngredientsApplianceOrUstensils(recipes, datalistAppliance, applianceTagsContainer, 'appliance');
 };
 
 export { uniquifyAppliance };

@@ -1,9 +1,7 @@
-import { filterInIngredients, removeTags, tagsList } from '../index.js';
+import { filterInIngredients, filterInAppliance, removeTags, tagsList, applianceTagsList } from '../index.js';
 
-const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsContainer) => {
-    Array.from(datalistElement.children).map((element) => {
-
-
+const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsContainer, filterType) => {
+	Array.from(datalistElement.children).map((element) => {
 		element.addEventListener('mouseover', (event) => {
 			event.target.classList.add('bg-primary', 'cursor-pointer');
 		});
@@ -12,8 +10,8 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 			event.target.classList.remove('bg-primary');
 		});
 
-        element.addEventListener('click', (event) => {
-            const currentTag = event.target;
+		element.addEventListener('click', (event) => {
+			const currentTag = event.target;
 
 			currentTag.classList.add('!list-none', '!p-0');
 
@@ -27,18 +25,25 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 			div.appendChild(i);
 
 			div.classList.add('flex', 'justify-between', 'items-center', 'bg-primary', 'p-3', 'mb-1', 'rounded-lg');
-            
-            if (!tagsList.includes(currentTag.textContent)) {
-                tagsList.push(currentTag.textContent);
-			    tagsContainer.appendChild(div);
-            }
+
+			if (!tagsList.includes(currentTag.textContent)) {
+				tagsList.push(currentTag.textContent);
+				tagsContainer.appendChild(div);
+			}
 
 			datalistElement.parentElement.classList.toggle('!block');
 
-            filterInIngredients(recipes, currentTag.textContent, 'adding');
-            removeTags(recipes);
+			if (filterType === 'ingredients') {
+				filterInIngredients(recipes, currentTag.textContent, 'adding');
+				removeTags(recipes);
+			} else if (filterType === 'appliance') {
+				filterInAppliance(recipes, currentTag.textContent, 'adding');
+				// removeTags(recipes);
+            } else if (filterType === 'ustensils') {
+                
+			}
 		});
 	});
 };
 
-export { selectIngredientsApplianceOrUstensils };
+export {selectIngredientsApplianceOrUstensils};

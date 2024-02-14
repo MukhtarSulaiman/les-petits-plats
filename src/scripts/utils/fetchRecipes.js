@@ -8,7 +8,6 @@ const fetchRecipes = async () => {
 
         const data = await response.json();
 
-        console.log('Les données sont récupérées avec succès !');
 
         return data;
 

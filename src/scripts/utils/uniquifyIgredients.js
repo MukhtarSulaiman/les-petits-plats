@@ -45,7 +45,7 @@ const displayIngredients = (recipes, uniqueIngredients) => {
         datalistIngredients.appendChild(li);
     }
 
-    selectIngredientsApplianceOrUstensils(recipes, datalistIngredients, ingredientTagsContainer);
+    selectIngredientsApplianceOrUstensils(recipes, datalistIngredients, ingredientTagsContainer, 'ingredients');
 };
 
 export { uniquifyIgredients };

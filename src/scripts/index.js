@@ -15,21 +15,12 @@ const iconChevronUpAppliance = datalistContainerAppliance.querySelector('.icon-c
 const iconChevronDownAppliance = datalistContainerAppliance.querySelector('.icon-chevron-down-appliance');
 const datalistAppliance = datalistContainerAppliance.querySelector('ul');
 
-//---------------- Appliance section -----------------
+//---------------- Ingredients section -----------------
 [iconChevronUpIngredients, iconChevronDownIngredients].map((chevronIcon) => {
 	chevronIcon.addEventListener('click', (event) => {
 		datalistIngredients.parentElement.classList.toggle('!block');
 		iconChevronUpIngredients.classList.toggle('hidden');
 		iconChevronDownIngredients.classList.toggle('!block');
-	});
-});
-
-//------------ Appliance section ------------------
-[iconChevronUpAppliance, iconChevronDownAppliance].map((chevronIcon) => {
-	chevronIcon.addEventListener('click', (event) => {
-		datalistAppliance.parentElement.classList.toggle('!block');
-		iconChevronUpAppliance.classList.toggle('hidden');
-		iconChevronDownAppliance.classList.toggle('!block');
 	});
 });
 
@@ -50,7 +41,7 @@ export const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
 		}
 	} else if (tagStatus === 'removing') {
 		tagsList.splice(tagsList.indexOf(ingredientLabel), 1);
-		console.log(tagsList);
+		
 		if (tagsList.length > 0) {
             for (let i = 0; i < recipes.length; i++) {
                 for (let j = 0; j < recipes[i].ingredients.length; j++) {
@@ -81,11 +72,61 @@ export const removeTags = (recipes) => {
 	});
 };
 
+
+//------------ Appliance section ------------------
+[iconChevronUpAppliance, iconChevronDownAppliance].map((chevronIcon) => {
+	chevronIcon.addEventListener('click', (event) => {
+		datalistAppliance.parentElement.classList.toggle('!block');
+		iconChevronUpAppliance.classList.toggle('hidden');
+		iconChevronDownAppliance.classList.toggle('!block');
+	});
+});
+
+
+export let applianceTagsList = [];
+
+export const filterInAppliance = (recipes, applianceLabel, tagStatus) => {
+    console.log(recipes)
+    console.log(applianceLabel)
+    console.log(tagStatus)
+
+    let filteredRecipes = [];
+
+	if (tagStatus === 'adding') {
+		for (let i = 0; i < recipes.length; i++) {
+            if (recipes[i].appliance.toLowerCase().includes(applianceLabel.toLowerCase())) {
+                filteredRecipes.push(recipes[i]);
+            }
+		}
+    } else if (tagStatus === 'removing') {
+		tagsList.splice(applianceTagsList.indexOf(applianceLabel), 1);
+		// console.log(applianceTagsList);
+		if (applianceTagsList.length > 0) {
+            for (let i = 0; i < recipes.length; i++) {
+               
+                for (let tag of applianceTagsList) {
+                    if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(tag.toLowerCase())) {
+                        if (filteredRecipes.indexOf(recipes[i]) === -1) {
+                            filteredRecipes.push(recipes[i]);
+                            break;
+                        }
+                    }
+				}
+			}
+		} else {
+			filteredRecipes = [...initialRecipess];
+		}
+	}
+    
+    displayRecipes(filteredRecipes);
+
+};
+
 const init = async () => {
 	const {recipes} = await fetchRecipes();
 
     initialRecipess = recipes;
-    
+
 	displayRecipes(recipes);
 	mainSearch(recipes);
 };
