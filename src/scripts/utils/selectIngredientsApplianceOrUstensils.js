@@ -1,5 +1,8 @@
 import { filterInIngredients, filterInAppliance, removeTags, tagsList, applianceTagsList } from '../index.js';
 
+const ingredientTagsContainer = document.getElementById('ingredient-tags-container');
+const applianceTagsContainer = document.getElementById('appliance-tags-container');
+
 const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsContainer, filterType) => {
 	Array.from(datalistElement.children).map((element) => {
 		element.addEventListener('mouseover', (event) => {
@@ -33,12 +36,16 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 
 			datalistElement.parentElement.classList.toggle('!block');
 
-			if (filterType === 'ingredients') {
+            if (filterType === 'ingredients') {
+                const removeTagButtons = Array.from(ingredientTagsContainer.querySelectorAll('div>i'));
+
 				filterInIngredients(recipes, currentTag.textContent, 'adding');
-				removeTags(recipes);
-			} else if (filterType === 'appliance') {
+				removeTags(recipes, removeTagButtons);
+            } else if (filterType === 'appliance') {
+                const removeTagButtons = Array.from(applianceTagsContainer.querySelectorAll('div>i'));
+
 				filterInAppliance(recipes, currentTag.textContent, 'adding');
-				// removeTags(recipes);
+				removeTags(recipes, removeTagButtons);
             } else if (filterType === 'ustensils') {
                 
 			}

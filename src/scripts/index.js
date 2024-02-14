@@ -7,7 +7,6 @@ const datalistContainerIngredients = document.querySelector('.datalist-container
 const iconChevronUpIngredients = datalistContainerIngredients.querySelector('.icon-chevron-up-ingredients');
 const iconChevronDownIngredients = datalistContainerIngredients.querySelector('.icon-chevron-down-ingredients');
 const datalistIngredients = datalistContainerIngredients.querySelector('ul');
-const ingredientTagsContainer = document.getElementById('ingredient-tags-container');
 
 const datalistContainerAppliance = document.querySelector('.datalist-container-appliance');
 
@@ -63,16 +62,6 @@ export const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
 	displayRecipes(filteredRecipes);
 };
 
-export const removeTags = (recipes) => {
-	const removeTagButtons = Array.from(ingredientTagsContainer.querySelectorAll('div>i'));
-
-	removeTagButtons[removeTagButtons.length - 1].addEventListener('click', (event) => {
-		filterInIngredients(recipes, event.target.previousSibling.textContent, 'removing');
-		event.target.parentElement.remove();
-	});
-};
-
-
 //------------ Appliance section ------------------
 [iconChevronUpAppliance, iconChevronDownAppliance].map((chevronIcon) => {
 	chevronIcon.addEventListener('click', (event) => {
@@ -99,7 +88,7 @@ export const filterInAppliance = (recipes, applianceLabel, tagStatus) => {
             }
 		}
     } else if (tagStatus === 'removing') {
-		tagsList.splice(applianceTagsList.indexOf(applianceLabel), 1);
+		applianceTagsList.splice(applianceTagsList.indexOf(applianceLabel), 1);
 		// console.log(applianceTagsList);
 		if (applianceTagsList.length > 0) {
             for (let i = 0; i < recipes.length; i++) {
@@ -120,6 +109,14 @@ export const filterInAppliance = (recipes, applianceLabel, tagStatus) => {
     
     displayRecipes(filteredRecipes);
 
+};
+
+export const removeTags = (recipes, removeTagButtons) => {
+
+	removeTagButtons[removeTagButtons.length - 1].addEventListener('click', (event) => {
+		filterInIngredients(recipes, event.target.previousSibling.textContent, 'removing');
+		event.target.parentElement.remove();
+	});
 };
 
 const init = async () => {
