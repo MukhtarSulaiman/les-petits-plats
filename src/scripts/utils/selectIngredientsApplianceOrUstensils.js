@@ -1,4 +1,4 @@
-import { filterInIngredients, filterInAppliance, removeTags, tagsList, applianceTagsList } from '../index.js';
+import { filterInIngredients, filterInAppliance, removeTags, ingredientsTagsList, applianceTagsList } from '../index.js';
 
 const ingredientTagsContainer = document.getElementById('ingredient-tags-container');
 const applianceTagsContainer = document.getElementById('appliance-tags-container');
@@ -29,8 +29,8 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 
 			div.classList.add('flex', 'justify-between', 'items-center', 'bg-primary', 'p-3', 'mb-1', 'rounded-lg');
 
-			if (!tagsList.includes(currentTag.textContent)) {
-				tagsList.push(currentTag.textContent);
+			if (!ingredientsTagsList.includes(currentTag.textContent)) {
+				ingredientsTagsList.push(currentTag.textContent);
 				tagsContainer.appendChild(div);
 			}
 

@@ -24,7 +24,7 @@ const datalistAppliance = datalistContainerAppliance.querySelector('ul');
 });
 
 let initialRecipess = [];
-export let tagsList = [];
+export let ingredientsTagsList = [];
 
 export const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
 	let filteredRecipes = [];
@@ -39,12 +39,12 @@ export const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
 			}
 		}
 	} else if (tagStatus === 'removing') {
-		tagsList.splice(tagsList.indexOf(ingredientLabel), 1);
+		ingredientsTagsList.splice(ingredientsTagsList.indexOf(ingredientLabel), 1);
 		
-		if (tagsList.length > 0) {
+		if (ingredientsTagsList.length > 0) {
             for (let i = 0; i < recipes.length; i++) {
                 for (let j = 0; j < recipes[i].ingredients.length; j++) {
-                    for (let tag of tagsList) {
+                    for (let tag of ingredientsTagsList) {
                         if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(tag.toLowerCase())) {
                             if (filteredRecipes.indexOf(recipes[i]) === -1) {
                                 filteredRecipes.push(recipes[i]);
