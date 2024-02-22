@@ -21,12 +21,14 @@ const datalistUstensils = datalistContainerUstensils.querySelector('ul');
 let initialRecipes = [];
 let filteredRecipes = [];
 
-export let ingredientsTagsList = [];
-export let applianceTagsList = [];
-export let ustensilTagsList = [];
+export const selectedTags = {
+	ingredients: [],
+	appliance: [],
+	ustensils: [],
+};
 
 //---------------- Ingredients section -----------------
-export const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
+export const filterInIngredients = (recipes, ingredientLabel, tagStatus, filterType) => {
 	filteredRecipes = [];
 
 	if (tagStatus === 'adding') {
@@ -39,12 +41,11 @@ export const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
 			}
 		}
 	} else if (tagStatus === 'removing') {
-		ingredientsTagsList.splice(ingredientsTagsList.indexOf(ingredientLabel), 1);
 
-		if (ingredientsTagsList.length > 0) {
+		if (selectedTags[filterType].length > 0) {
 			for (let i = 0; i < recipes.length; i++) {
 				for (let j = 0; j < recipes[i].ingredients.length; j++) {
-					for (let tag of ingredientsTagsList) {
+					for (let tag of selectedTags[filterType]) {
 						if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(tag.toLowerCase())) {
 							if (filteredRecipes.indexOf(recipes[i]) === -1) {
 								filteredRecipes.push(recipes[i]);
@@ -55,11 +56,11 @@ export const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
 				}
 			}
 		} else {
-			if (applianceTagsList.length < 1) {
+			if (selectedTags[filterType].length < 1) {
 				filteredRecipes = [...initialRecipes];
 			} else {
 				for (let i = 0; i < recipes.length; i++) {
-					if (recipes[i].appliance.toLowerCase().includes(applianceTagsList[0].toLowerCase())) {
+					if (recipes[i].appliance.toLowerCase().includes(selectedTags[filterType][0].toLowerCase())) {
 						filteredRecipes.push(recipes[i]);
 					}
 				}
@@ -71,10 +72,7 @@ export const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
 };
 
 //------------ Appliance section ------------------
-export const filterInAppliance = (recipes, applianceLabel, tagStatus) => {
-	console.log(ingredientsTagsList);
-	console.log(applianceTagsList);
-	// console.log(tagStatus)
+export const filterInAppliance = (recipes, applianceLabel, tagStatus, filterType) => {
 
 	let filteredRecipes = [];
 
@@ -85,18 +83,17 @@ export const filterInAppliance = (recipes, applianceLabel, tagStatus) => {
 			}
 		}
 	} else if (tagStatus === 'removing') {
-		applianceTagsList.splice(applianceTagsList.indexOf(applianceLabel), 1);
 
-		if (applianceTagsList.length > 0) {
+		if (selectedTags[filterType].length > 0) {
 			for (let i = 0; i < recipes.length; i++) {
-				// for (let tag of applianceTagsList) {
-				//     if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(tag.toLowerCase())) {
-				//         if (filteredRecipes.indexOf(recipes[i]) === -1) {
-				//             filteredRecipes.push(recipes[i]);
-				//             break;
-				//         }
-				//     }
-				// }
+				for (let tag of selectedTags[filterType]) {
+				    if (recipes[i].appliance.toLowerCase().includes(tag.toLowerCase())) {
+				        if (filteredRecipes.indexOf(recipes[i]) === -1) {
+				            filteredRecipes.push(recipes[i]);
+				            break;
+				        }
+				    }
+				}
 			}
 		} else {
 			filteredRecipes = [...initialRecipes];
@@ -107,9 +104,9 @@ export const filterInAppliance = (recipes, applianceLabel, tagStatus) => {
 };
 
 //------------ Ustensils section ------------------
-export const filterInUstensils = (recipes, ustensilLabel, tagStatus) => {
+export const filterInUstensils = (recipes, ustensilLabel, tagStatus, filterType) => {
 	let filteredRecipes = [];
-
+	
 	if (tagStatus === 'adding') {
 		for (let i = 0; i < recipes.length; i++) {
 			for (let j = 0; j < recipes[i].ustensils.length; j++) {
@@ -120,28 +117,51 @@ export const filterInUstensils = (recipes, ustensilLabel, tagStatus) => {
 			}
 		}
 	} else if (tagStatus === 'removing') {
-		applianceTagsList.splice(applianceTagsList.indexOf(ustensilLabel), 1);
-
-		if (applianceTagsList.length > 0) {
+       
+		if (filterType.length > 0) {
+			for (let i = 0; i < recipes.length; i++) {
+				for (let j = 0; j < recipes[i].ustensils.length; j++) {
+					for (let tag of filterType) {
+						if (recipes[i].ustensils[j].toLowerCase().includes(tag.toLowerCase())) {
+							if (filteredRecipes.indexOf(recipes[i]) === -1) {
+								filteredRecipes.push(recipes[i]);
+								break;
+							}
+						}
+					}
+				}
+			}
 		} else {
-			filteredRecipes = [...initialRecipes];
+			if (filterType.length < 1) {
+				filteredRecipes = [...initialRecipes];
+			} else {
+				for (let i = 0; i < recipes.length; i++) {
+					if (recipes[i].appliance.toLowerCase().includes(filterType[0].toLowerCase())) {
+						filteredRecipes.push(recipes[i]);
+					}
+				}
+			}
 		}
 	}
 
 	displayRecipes(filteredRecipes);
 };
 
+
 // Removing tags
 export const removeTags = (recipes, removeTagButtons, filterType) => {
-	removeTagButtons[removeTagButtons.length - 1].addEventListener('click', (event) => {
+    removeTagButtons[removeTagButtons.length - 1].addEventListener('click', (event) => {
+        const tagLabel = event.target.previousSibling.textContent;
+        selectedTags[filterType].splice(selectedTags[filterType].indexOf(tagLabel), 1);
+
 		if (filterType === 'ingredients') {
-			filterInIngredients(recipes, event.target.previousSibling.textContent, 'removing');
+			filterInIngredients(recipes, event.target.previousSibling.textContent, 'removing', filterType);
 			event.target.parentElement.remove();
 		} else if (filterType === 'appliance') {
-			filterInAppliance(recipes, event.target.previousSibling.textContent, 'removing');
+			filterInAppliance(recipes, event.target.previousSibling.textContent, 'removing', filterType);
 			event.target.parentElement.remove();
 		} else if (filterType === 'ustensils') {
-			filterInUstensils(recipes, event.target.previousSibling.textContent, 'removing');
+			filterInUstensils(recipes, event.target.previousSibling.textContent, 'removing', filterType);
 			event.target.parentElement.remove();
 		}
 	});

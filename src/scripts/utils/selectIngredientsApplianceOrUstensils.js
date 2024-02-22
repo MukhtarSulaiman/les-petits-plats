@@ -1,4 +1,4 @@
-import { filterInIngredients, filterInAppliance, filterInUstensils, ingredientsTagsList, applianceTagsList, ustensilTagsList, removeTags } from '../index.js';
+import { selectedTags, filterInIngredients, filterInAppliance, filterInUstensils, removeTags } from '../index.js';
 
 const ingredientTagsContainer = document.getElementById('ingredient-tags-container');
 const applianceTagsContainer = document.getElementById('appliance-tags-container');
@@ -30,18 +30,18 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 
 			div.classList.add('flex', 'justify-between', 'items-center', 'bg-primary', 'p-3', 'mb-1', 'rounded-lg');
 
-			if (!ingredientsTagsList.includes(currentTag.textContent) && filterType === 'ingredients') {
-				ingredientsTagsList.push(currentTag.textContent);
+			if (!selectedTags[filterType].includes(currentTag.textContent) && filterType === 'ingredients') {
+				selectedTags[filterType].push(currentTag.textContent);
 				tagsContainer.appendChild(div);
 			}
 
-			if (!applianceTagsList.includes(currentTag.textContent) && filterType === 'appliance') {
-				applianceTagsList.push(currentTag.textContent);
+			if (!selectedTags[filterType].includes(currentTag.textContent) && filterType === 'appliance') {
+				selectedTags[filterType].push(currentTag.textContent);
 				tagsContainer.appendChild(div);
 			}
-
-			if (!ustensilTagsList.includes(currentTag.textContent) && filterType === 'ustensils') {
-				ustensilTagsList.push(currentTag.textContent);
+            
+            if (!selectedTags[filterType].includes(currentTag.textContent) && filterType === 'ustensils') {
+				selectedTags[filterType].push(currentTag.textContent);
 				tagsContainer.appendChild(div);
 			}
 
