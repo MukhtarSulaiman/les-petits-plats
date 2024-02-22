@@ -12,6 +12,11 @@ const iconChevronUpAppliance = datalistContainerAppliance.querySelector('.icon-c
 const iconChevronDownAppliance = datalistContainerAppliance.querySelector('.icon-chevron-down-appliance');
 const datalistAppliance = datalistContainerAppliance.querySelector('ul');
 
+const datalistContainerUstensils = document.querySelector('.datalist-container-ustensils');
+const iconChevronUpUstensils = datalistContainerUstensils.querySelector('.icon-chevron-up-ustensils');
+const iconChevronDownUstensils = datalistContainerUstensils.querySelector('.icon-chevron-down-ustensils');
+const datalistUstensils = datalistContainerUstensils.querySelector('ul');
+
 //---------------- Ingredients section -----------------
 [iconChevronUpIngredients, iconChevronDownIngredients].map((chevronIcon) => {
 	chevronIcon.addEventListener('click', (event) => {
@@ -83,9 +88,9 @@ export const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
 
 
 export const filterInAppliance = (recipes, applianceLabel, tagStatus) => {
-    console.log(recipes)
-    console.log(applianceLabel)
-    console.log(tagStatus)
+    console.log(ingredientsTagsList)
+    console.log(applianceTagsList)
+    // console.log(tagStatus)
 
     let filteredRecipes = [];
 
@@ -118,6 +123,16 @@ export const filterInAppliance = (recipes, applianceLabel, tagStatus) => {
     displayRecipes(filteredRecipes);
 
 };
+
+
+//------------ Ustensils section ------------------
+[iconChevronUpUstensils, iconChevronDownUstensils].map((chevronIcon) => {
+	chevronIcon.addEventListener('click', (event) => {
+		datalistUstensils.parentElement.classList.toggle('!block');
+		iconChevronUpUstensils.classList.toggle('hidden');
+		iconChevronDownUstensils.classList.toggle('!block');
+	});
+});
 
 export const removeTags = (recipes, removeTagButtons, filterType) => {
 

@@ -2,6 +2,7 @@ import { filterInIngredients, filterInAppliance, removeTags, ingredientsTagsList
 
 const ingredientTagsContainer = document.getElementById('ingredient-tags-container');
 const applianceTagsContainer = document.getElementById('appliance-tags-container');
+const ustensilTagsContainer = document.getElementById('ustensil-tags-container');
 
 const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsContainer, filterType) => {
 	Array.from(datalistElement.children).map((element) => {
@@ -39,6 +40,11 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 				tagsContainer.appendChild(div);
 			}
 
+			if (!applianceTagsList.includes(currentTag.textContent) && filterType === 'ustensils') {
+				applianceTagsList.push(currentTag.textContent);
+				tagsContainer.appendChild(div);
+			}
+
 			datalistElement.parentElement.classList.toggle('!block');
 
 			if (filterType === 'ingredients') {
@@ -53,6 +59,9 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 				removeTags(recipes, removeTagButtons, filterType);
 			} else if (filterType === 'ustensils') {
 				const removeTagButtons = Array.from(ustensilTagsContainer.querySelectorAll('div>i'));
+
+				filterInAppliance(recipes, currentTag.textContent, 'adding');
+				removeTags(recipes, removeTagButtons, filterType);
 			}
 		});
 	});
