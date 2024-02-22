@@ -1,4 +1,4 @@
-import { filterInIngredients, filterInAppliance, removeTags, ingredientsTagsList, applianceTagsList } from '../index.js';
+import { filterInIngredients, filterInAppliance, filterInUstensils, ingredientsTagsList, applianceTagsList, ustensilTagsList, removeTags } from '../index.js';
 
 const ingredientTagsContainer = document.getElementById('ingredient-tags-container');
 const applianceTagsContainer = document.getElementById('appliance-tags-container');
@@ -40,8 +40,8 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 				tagsContainer.appendChild(div);
 			}
 
-			if (!applianceTagsList.includes(currentTag.textContent) && filterType === 'ustensils') {
-				applianceTagsList.push(currentTag.textContent);
+			if (!ustensilTagsList.includes(currentTag.textContent) && filterType === 'ustensils') {
+				ustensilTagsList.push(currentTag.textContent);
 				tagsContainer.appendChild(div);
 			}
 
@@ -60,7 +60,7 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 			} else if (filterType === 'ustensils') {
 				const removeTagButtons = Array.from(ustensilTagsContainer.querySelectorAll('div>i'));
 
-				filterInAppliance(recipes, currentTag.textContent, 'adding');
+				filterInUstensils(recipes, currentTag.textContent, 'adding');
 				removeTags(recipes, removeTagButtons, filterType);
 			}
 		});

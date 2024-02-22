@@ -26,11 +26,12 @@ const datalistUstensils = datalistContainerUstensils.querySelector('ul');
 	});
 });
 
-let initialRecipess = [];
+let initialRecipes = [];
 let filteredRecipes = [];
 
 export let ingredientsTagsList = [];
 export let applianceTagsList = [];
+export let ustensilTagsList = [];
 
 
 export const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
@@ -63,7 +64,7 @@ export const filterInIngredients = (recipes, ingredientLabel, tagStatus) => {
 			}
         } else {
             if (applianceTagsList.length < 1) {   
-                filteredRecipes = [...initialRecipess];
+                filteredRecipes = [...initialRecipes];
             } else {
                 for (let i = 0; i < recipes.length; i++) {
                     if (recipes[i].appliance.toLowerCase().includes(applianceTagsList[0].toLowerCase())) {
@@ -116,7 +117,7 @@ export const filterInAppliance = (recipes, applianceLabel, tagStatus) => {
 				// }
 			}
 		} else {
-			filteredRecipes = [...initialRecipess];
+			filteredRecipes = [...initialRecipes];
 		}
 	}
     
@@ -134,23 +135,58 @@ export const filterInAppliance = (recipes, applianceLabel, tagStatus) => {
 	});
 });
 
+export const filterInUstensils = (recipes, ustensilLabel, tagStatus) => {
+
+    let filteredRecipes = [];
+
+	if (tagStatus === 'adding') {
+		for (let i = 0; i < recipes.length; i++) {
+			for (let j = 0; j < recipes[i].ustensils.length; j++) {
+				if (recipes[i].ustensils[j].toLowerCase().includes(ustensilLabel.toLowerCase())) {
+					filteredRecipes.push(recipes[i]);
+					break;
+				}
+			}
+		}
+    }
+    else if (tagStatus === 'removing') {
+		applianceTagsList.splice(applianceTagsList.indexOf(ustensilLabel), 1);
+		
+		if (applianceTagsList.length > 0) {
+         
+		} else {
+			filteredRecipes = [...initialRecipes];
+		}
+	}
+    
+    displayRecipes(filteredRecipes);
+};
+
+// Removing tags
 export const removeTags = (recipes, removeTagButtons, filterType) => {
 
     removeTagButtons[removeTagButtons.length - 1].addEventListener('click', (event) => {
         if (filterType === 'ingredients') {
             filterInIngredients(recipes, event.target.previousSibling.textContent, 'removing');
             event.target.parentElement.remove();
+
         } else  if (filterType === 'appliance') {
             filterInAppliance(recipes, event.target.previousSibling.textContent, 'removing');
+            event.target.parentElement.remove();
+
+        }  else  if (filterType === 'ustensils') {
+            filterInUstensils(recipes, event.target.previousSibling.textContent, 'removing');
             event.target.parentElement.remove();
         }
 	});
 };
 
+
+// Init the recipes
 const init = async () => {
 	const {recipes} = await fetchRecipes();
 
-    initialRecipess = recipes;
+    initialRecipes = recipes;
 
 	displayRecipes(recipes);
 	mainSearch(recipes);
