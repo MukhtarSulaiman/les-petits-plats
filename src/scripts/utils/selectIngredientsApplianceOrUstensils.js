@@ -29,25 +29,30 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 
 			div.classList.add('flex', 'justify-between', 'items-center', 'bg-primary', 'p-3', 'mb-1', 'rounded-lg');
 
-			if (!ingredientsTagsList.includes(currentTag.textContent)) {
+			if (!ingredientsTagsList.includes(currentTag.textContent) && filterType === 'ingredients') {
 				ingredientsTagsList.push(currentTag.textContent);
+				tagsContainer.appendChild(div);
+			}
+
+			if (!applianceTagsList.includes(currentTag.textContent) && filterType === 'appliance') {
+				applianceTagsList.push(currentTag.textContent);
 				tagsContainer.appendChild(div);
 			}
 
 			datalistElement.parentElement.classList.toggle('!block');
 
-            if (filterType === 'ingredients') {
-                const removeTagButtons = Array.from(ingredientTagsContainer.querySelectorAll('div>i'));
+			if (filterType === 'ingredients') {
+				const removeTagButtons = Array.from(ingredientTagsContainer.querySelectorAll('div>i'));
 
 				filterInIngredients(recipes, currentTag.textContent, 'adding');
-				removeTags(recipes, removeTagButtons);
-            } else if (filterType === 'appliance') {
-                const removeTagButtons = Array.from(applianceTagsContainer.querySelectorAll('div>i'));
+				removeTags(recipes, removeTagButtons, filterType);
+			} else if (filterType === 'appliance') {
+				const removeTagButtons = Array.from(applianceTagsContainer.querySelectorAll('div>i'));
 
 				filterInAppliance(recipes, currentTag.textContent, 'adding');
-				removeTags(recipes, removeTagButtons);
-            } else if (filterType === 'ustensils') {
-                
+				removeTags(recipes, removeTagButtons, filterType);
+			} else if (filterType === 'ustensils') {
+				const removeTagButtons = Array.from(ustensilTagsContainer.querySelectorAll('div>i'));
 			}
 		});
 	});
