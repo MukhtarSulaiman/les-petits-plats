@@ -37,7 +37,7 @@ const mainSearch = (recipes) => {
                     }
                 }
             }
-            displayRecipes(filteredRecipes);
+            displayRecipes(filteredRecipes, mainSearchInputValue);
         }
 	});
 

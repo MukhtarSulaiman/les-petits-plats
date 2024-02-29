@@ -9,7 +9,7 @@ const alertMessage = document.getElementById('alert-message');
 const totaleRecipesAvailable = document.querySelector('.totale-recipes-available');
 
 // Displaying filtered elements
-const displayRecipes = (recipes) => {
+const displayRecipes = (recipes, searchValue) => {
     recipesContainer.replaceChildren();
  
     if (recipes.length > 0) {
@@ -21,14 +21,16 @@ const displayRecipes = (recipes) => {
     
             recipesContainer.appendChild(recipeCard);
         }
-        totaleRecipesAvailable.firstChild.textContent = recipes.length;
-        
-        uniquifyIgredients(recipes);
-        uniquifyAppliance(recipes);
-        uniquifyUstensils(recipes);
     } else {
         alertMessage.classList.add('!flex');
+        alertMessage.innerHTML = `Aucune recette contient <span class="text-primary mx-1">${searchValue}</span>  ! Vous pouvez chercher tarte aux pommes, poisson, etc.`;
     }
+
+    totaleRecipesAvailable.firstChild.textContent = recipes.length;
+    
+    uniquifyIgredients(recipes);
+    uniquifyAppliance(recipes);
+    uniquifyUstensils(recipes);
 };
 
 export { displayRecipes };
