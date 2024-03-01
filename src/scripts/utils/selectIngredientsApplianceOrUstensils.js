@@ -1,4 +1,4 @@
-import { selectedTags, filterInIngredients, filterInAppliance, filterInUstensils, removeTags } from '../index.js';
+import { selectedTags, filteringRecipes, removeTags } from '../index.js';
 
 const ingredientTagsContainer = document.getElementById('ingredient-tags-container');
 const applianceTagsContainer = document.getElementById('appliance-tags-container');
@@ -50,17 +50,17 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 			if (filterType === 'ingredients') {
 				const removeTagButtons = Array.from(ingredientTagsContainer.querySelectorAll('div>i'));
 
-				filterInIngredients(recipes, currentTag.textContent, 'adding');
+				filteringRecipes(recipes, currentTag.textContent, 'adding', filterType);
 				removeTags(recipes, removeTagButtons, filterType);
 			} else if (filterType === 'appliance') {
 				const removeTagButtons = Array.from(applianceTagsContainer.querySelectorAll('div>i'));
 
-				filterInAppliance(recipes, currentTag.textContent, 'adding');
+				filteringRecipes(recipes, currentTag.textContent, 'adding', filterType);
 				removeTags(recipes, removeTagButtons, filterType);
 			} else if (filterType === 'ustensils') {
 				const removeTagButtons = Array.from(ustensilTagsContainer.querySelectorAll('div>i'));
 
-				filterInUstensils(recipes, currentTag.textContent, 'adding');
+				filteringRecipes(recipes, currentTag.textContent, 'adding', filterType);
 				removeTags(recipes, removeTagButtons, filterType);
 			}
 		});

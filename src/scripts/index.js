@@ -1,6 +1,6 @@
+import { mainSearch } from './searches/mainSearch.js';
 import { fetchRecipes } from './utils/fetchRecipes.js';
 import { displayRecipes } from './utils/displayRecipes.js';
-import { mainSearch } from './searches/mainSearch.js';
 import { hideOrDisplayFilters } from './utils/hideOrDisplayFilters.js';
 
 const datalistContainerIngredients = document.querySelector('.datalist-container-ingredients');
@@ -25,124 +25,116 @@ export const selectedTags = {
 	ingredients: [],
 	appliance: [],
 	ustensils: [],
-};
+}
 
-//---------------- Ingredients section -----------------
-export const filterInIngredients = (recipes, ingredientLabel, tagStatus, filterType) => {
-	filteredRecipes = [];
 
-	if (tagStatus === 'adding') {
-		for (let i = 0; i < recipes.length; i++) {
-			for (let j = 0; j < recipes[i].ingredients.length; j++) {
-				if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(ingredientLabel.toLowerCase())) {
-					filteredRecipes.push(recipes[i]);
-					break;
-				}
-			}
-		}
-	} else if (tagStatus === 'removing') {
+//---------------- Filters section -----------------
+export const filteringRecipes = (recipes, tagLabel, tagStatus, filterType) => {
+    filteredRecipes = [];
+    
+    // Adding tags section
+    if (tagStatus === 'adding') {
+        if (filterType === 'ingredients') {
+            for (let i = 0; i < recipes.length; i++) {
+                for (let j = 0; j < recipes[i].ingredients.length; j++) {
+                    if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(tagLabel.toLowerCase())) {
+                        filteredRecipes.push(recipes[i]);
+                        break;
+                    }
+                }
+            }
+        } else if (filterType === 'appliance') { 
+            for (let i = 0; i < recipes.length; i++) {
+                if (recipes[i].appliance.toLowerCase().includes(tagLabel.toLowerCase())) {
+                    filteredRecipes.push(recipes[i]);
+                }
+            }
+        } else if (filterType === 'ustensils') {
+            for (let i = 0; i < recipes.length; i++) {
+                for (let j = 0; j < recipes[i].ustensils.length; j++) {
+                    if (recipes[i].ustensils[j].toLowerCase().includes(tagLabel.toLowerCase())) {
+                        filteredRecipes.push(recipes[i]);
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
-		if (selectedTags[filterType].length > 0) {
-			for (let i = 0; i < recipes.length; i++) {
-				for (let j = 0; j < recipes[i].ingredients.length; j++) {
-					for (let tag of selectedTags[filterType]) {
-						if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(tag.toLowerCase())) {
-							if (filteredRecipes.indexOf(recipes[i]) === -1) {
-								filteredRecipes.push(recipes[i]);
-								break;
-							}
-						}
-					}
-				}
-			}
-		} else {
-			if (selectedTags[filterType].length < 1) {
-				filteredRecipes = [...initialRecipes];
-			} else {
-				for (let i = 0; i < recipes.length; i++) {
-					if (recipes[i].appliance.toLowerCase().includes(selectedTags[filterType][0].toLowerCase())) {
-						filteredRecipes.push(recipes[i]);
-					}
-				}
-			}
-		}
-	}
+    // Removing tags section 
+    else if (tagStatus === 'removing') {
+        selectedTags[filterType].splice(selectedTags[filterType].indexOf(tagLabel), 1);
 
-	displayRecipes(filteredRecipes);
-};
+        if (filterType === 'ingredients') {
+            if (selectedTags[filterType].length > 0) {
+                for (let i = 0; i < recipes.length; i++) {
+                    for (let j = 0; j < recipes[i].ingredients.length; j++) {
+                        for (let tag of selectedTags[filterType]) {
+                            if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(tag.toLowerCase())) {
+                                if (filteredRecipes.indexOf(recipes[i]) === -1) {
+                                    filteredRecipes.push(recipes[i]);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (selectedTags['appliance'].length < 1 && selectedTags['ustensils'].length < 1) {
+                    filteredRecipes = [...initialRecipes];
+                } else {
+                    for (let i = 0; i < recipes.length; i++) {
+                        if (recipes[i].appliance.toLowerCase().includes(selectedTags[filterType][0].toLowerCase())) {
+                            filteredRecipes.push(recipes[i]);
+                        }
+                    }
+                }
+            }
+        } else if (filterType === 'appliance') {
 
-//------------ Appliance section ------------------
-export const filterInAppliance = (recipes, applianceLabel, tagStatus, filterType) => {
+            if (selectedTags[filterType].length > 0) {
+                for (let i = 0; i < recipes.length; i++) {
+                    for (let tag of selectedTags[filterType]) {
+                        if (recipes[i].appliance.toLowerCase().includes(tag.toLowerCase())) {
+                            if (filteredRecipes.indexOf(recipes[i]) === -1) {
+                                filteredRecipes.push(recipes[i]);
+                                break;
+                            }
+                        }
+                    }
+                }
+            } else {
+                filteredRecipes = [...initialRecipes];
+            }
 
-	let filteredRecipes = [];
+        } else if (filterType === 'ustensils') {
 
-	if (tagStatus === 'adding') {
-		for (let i = 0; i < recipes.length; i++) {
-			if (recipes[i].appliance.toLowerCase().includes(applianceLabel.toLowerCase())) {
-				filteredRecipes.push(recipes[i]);
-			}
-		}
-	} else if (tagStatus === 'removing') {
-
-		if (selectedTags[filterType].length > 0) {
-			for (let i = 0; i < recipes.length; i++) {
-				for (let tag of selectedTags[filterType]) {
-				    if (recipes[i].appliance.toLowerCase().includes(tag.toLowerCase())) {
-				        if (filteredRecipes.indexOf(recipes[i]) === -1) {
-				            filteredRecipes.push(recipes[i]);
-				            break;
-				        }
-				    }
-				}
-			}
-		} else {
-			filteredRecipes = [...initialRecipes];
-		}
-	}
-
-	displayRecipes(filteredRecipes);
-};
-
-//------------ Ustensils section ------------------
-export const filterInUstensils = (recipes, ustensilLabel, tagStatus, filterType) => {
-	let filteredRecipes = [];
-	
-	if (tagStatus === 'adding') {
-		for (let i = 0; i < recipes.length; i++) {
-			for (let j = 0; j < recipes[i].ustensils.length; j++) {
-				if (recipes[i].ustensils[j].toLowerCase().includes(ustensilLabel.toLowerCase())) {
-					filteredRecipes.push(recipes[i]);
-					break;
-				}
-			}
-		}
-	} else if (tagStatus === 'removing') {
-       
-		if (filterType.length > 0) {
-			for (let i = 0; i < recipes.length; i++) {
-				for (let j = 0; j < recipes[i].ustensils.length; j++) {
-					for (let tag of filterType) {
-						if (recipes[i].ustensils[j].toLowerCase().includes(tag.toLowerCase())) {
-							if (filteredRecipes.indexOf(recipes[i]) === -1) {
-								filteredRecipes.push(recipes[i]);
-								break;
-							}
-						}
-					}
-				}
-			}
-		} else {
-			if (filterType.length < 1) {
-				filteredRecipes = [...initialRecipes];
-			} else {
-				for (let i = 0; i < recipes.length; i++) {
-					if (recipes[i].appliance.toLowerCase().includes(filterType[0].toLowerCase())) {
-						filteredRecipes.push(recipes[i]);
-					}
-				}
-			}
-		}
-	}
+        	if (selectedTags[filterType].length > 0) {
+                for (let i = 0; i < recipes.length; i++) {
+                    for (let j = 0; j < recipes[i].ustensils.length; j++) {
+                        for (let tag of selectedTags[filterType]) {
+                            if (recipes[i].ustensils[j].toLowerCase().includes(tag.toLowerCase())) {
+                                if (filteredRecipes.indexOf(recipes[i]) === -1) {
+                                    filteredRecipes.push(recipes[i]);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (filterType.length < 1) {
+                    filteredRecipes = [...initialRecipes];
+                } else {
+                    for (let i = 0; i < recipes.length; i++) {
+                        if (recipes[i].appliance.toLowerCase().includes(filterType[0].toLowerCase())) {
+                            filteredRecipes.push(recipes[i]);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 	displayRecipes(filteredRecipes);
 };
@@ -150,20 +142,12 @@ export const filterInUstensils = (recipes, ustensilLabel, tagStatus, filterType)
 
 // Removing tags
 export const removeTags = (recipes, removeTagButtons, filterType) => {
+    
     removeTagButtons[removeTagButtons.length - 1].addEventListener('click', (event) => {
         const tagLabel = event.target.previousSibling.textContent;
-        selectedTags[filterType].splice(selectedTags[filterType].indexOf(tagLabel), 1);
-
-		if (filterType === 'ingredients') {
-			filterInIngredients(recipes, event.target.previousSibling.textContent, 'removing', filterType);
-			event.target.parentElement.remove();
-		} else if (filterType === 'appliance') {
-			filterInAppliance(recipes, event.target.previousSibling.textContent, 'removing', filterType);
-			event.target.parentElement.remove();
-		} else if (filterType === 'ustensils') {
-			filterInUstensils(recipes, event.target.previousSibling.textContent, 'removing', filterType);
-			event.target.parentElement.remove();
-		}
+   
+        filteringRecipes(recipes, tagLabel, 'removing', filterType);
+        event.target.parentElement.remove();
 	});
 };
 
