@@ -18,14 +18,15 @@ const iconChevronUpUstensils = datalistContainerUstensils.querySelector('.icon-c
 const iconChevronDownUstensils = datalistContainerUstensils.querySelector('.icon-chevron-down-ustensils');
 const datalistUstensils = datalistContainerUstensils.querySelector('ul');
 
+
 let initialRecipes = [];
 let filteredRecipes = [];
 
 export const selectedTags = {
-	ingredients: [],
-	appliance: [],
-	ustensils: [],
-}
+    ingredients: [],
+    appliance: [],
+    ustensils: [],
+};
 
 
 //---------------- Filters section -----------------
@@ -63,29 +64,32 @@ export const filteringRecipes = (recipes, tagLabel, tagStatus, filterType) => {
 
     // Removing tags section 
     else if (tagStatus === 'removing') {
+        // Removes the targeted tag from it's array
         selectedTags[filterType].splice(selectedTags[filterType].indexOf(tagLabel), 1);
 
         if (filterType === 'ingredients') {
             if (selectedTags[filterType].length > 0) {
-                for (let i = 0; i < recipes.length; i++) {
-                    for (let j = 0; j < recipes[i].ingredients.length; j++) {
+                for (let i = 0; i < initialRecipes.length; i++) {
+                    for (let j = 0; j < initialRecipes[i].ingredients.length; j++) {
+                        let isMatch = false;
+
                         for (let tag of selectedTags[filterType]) {
-                            if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(tag.toLowerCase())) {
-                                if (filteredRecipes.indexOf(recipes[i]) === -1) {
-                                    filteredRecipes.push(recipes[i]);
+                            if (initialRecipes[i].ingredients[j].ingredient.toLowerCase().includes(tag.toLowerCase())) {
+                                    filteredRecipes.push(initialRecipes[i]);
+                                    isMatch = true;
                                     break;
-                                }
                             }
                         }
+                        if (isMatch) break;
                     }
                 }
             } else {
                 if (selectedTags['appliance'].length < 1 && selectedTags['ustensils'].length < 1) {
                     filteredRecipes = [...initialRecipes];
                 } else {
-                    for (let i = 0; i < recipes.length; i++) {
-                        if (recipes[i].appliance.toLowerCase().includes(selectedTags[filterType][0].toLowerCase())) {
-                            filteredRecipes.push(recipes[i]);
+                    for (let i = 0; i < initialRecipes.length; i++) {
+                        if (initialRecipes[i].appliance.toLowerCase().includes(selectedTags[filterType][0].toLowerCase())) {
+                            filteredRecipes.push(initialRecipes[i]);
                         }
                     }
                 }
@@ -93,13 +97,11 @@ export const filteringRecipes = (recipes, tagLabel, tagStatus, filterType) => {
         } else if (filterType === 'appliance') {
 
             if (selectedTags[filterType].length > 0) {
-                for (let i = 0; i < recipes.length; i++) {
+                for (let i = 0; i < initialRecipes.length; i++) {
                     for (let tag of selectedTags[filterType]) {
-                        if (recipes[i].appliance.toLowerCase().includes(tag.toLowerCase())) {
-                            if (filteredRecipes.indexOf(recipes[i]) === -1) {
-                                filteredRecipes.push(recipes[i]);
-                                break;
-                            }
+                        if (initialRecipes[i].appliance.toLowerCase().includes(tag.toLowerCase())) {
+                            filteredRecipes.push(initialRecipes[i]);
+                            break;
                         }
                     }
                 }
@@ -110,25 +112,26 @@ export const filteringRecipes = (recipes, tagLabel, tagStatus, filterType) => {
         } else if (filterType === 'ustensils') {
 
         	if (selectedTags[filterType].length > 0) {
-                for (let i = 0; i < recipes.length; i++) {
-                    for (let j = 0; j < recipes[i].ustensils.length; j++) {
+                for (let i = 0; i < initialRecipes.length; i++) {
+                    for (let j = 0; j < initialRecipes[i].ustensils.length; j++) {
+                        let isMatch = false;
                         for (let tag of selectedTags[filterType]) {
-                            if (recipes[i].ustensils[j].toLowerCase().includes(tag.toLowerCase())) {
-                                if (filteredRecipes.indexOf(recipes[i]) === -1) {
-                                    filteredRecipes.push(recipes[i]);
-                                    break;
-                                }
+                            if (initialRecipes[i].ustensils[j].toLowerCase().includes(tag.toLowerCase())) {
+                                filteredRecipes.push(initialRecipes[i]);
+                                isMatch = true;
+                                break;
                             }
                         }
+                        if (isMatch) break;
                     }
                 }
             } else {
-                if (filterType.length < 1) {
+                if (selectedTags['ingredients'].length < 1 && selectedTags['appliance'].length < 1) {
                     filteredRecipes = [...initialRecipes];
                 } else {
-                    for (let i = 0; i < recipes.length; i++) {
-                        if (recipes[i].appliance.toLowerCase().includes(filterType[0].toLowerCase())) {
-                            filteredRecipes.push(recipes[i]);
+                    for (let i = 0; i < initialRecipes.length; i++) {
+                        if (initialRecipes[i].appliance.toLowerCase().includes(filterType[0].toLowerCase())) {
+                            filteredRecipes.push(initialRecipes[i]);
                         }
                     }
                 }
