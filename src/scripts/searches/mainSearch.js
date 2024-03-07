@@ -27,10 +27,10 @@ const mainSearch = (recipes) => {
             const filteredRecipes = recipes.filter(recipe => {
                 if (recipe.name.toLowerCase().includes(mainSearchInputValue)) return recipe;
                 else if (recipe.description.toLowerCase().includes(mainSearchInputValue)) return recipe;
-                else if (recipe.ingredients.length > 0) {
-                    for (let j = 0; j < recipe.ingredients.length; j++) {
-                        if (recipe.ingredients[j].ingredient.toLowerCase().includes(mainSearchInputValue)) return recipe;
-                    }
+                else if (recipe.ingredients) {
+                    return recipe.ingredients.forEach(ingredient => {
+                        if (ingredient.ingredient.toLowerCase().includes(mainSearchInputValue)) return recipe;
+                    });
                 }
             });
             displayRecipes(filteredRecipes, mainSearchInputValue);
