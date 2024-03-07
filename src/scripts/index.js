@@ -13,10 +13,10 @@ const iconChevronUpAppliance = datalistContainerAppliance.querySelector('.icon-c
 const iconChevronDownAppliance = datalistContainerAppliance.querySelector('.icon-chevron-down-appliance');
 const datalistAppliance = datalistContainerAppliance.querySelector('ul');
 
-const datalistContainerUstensils = document.querySelector('.datalist-container-ustensils');
-const iconChevronUpUstensils = datalistContainerUstensils.querySelector('.icon-chevron-up-ustensils');
-const iconChevronDownUstensils = datalistContainerUstensils.querySelector('.icon-chevron-down-ustensils');
-const datalistUstensils = datalistContainerUstensils.querySelector('ul');
+const datalistContainerUtensils = document.querySelector('.datalist-container-utensils');
+const iconChevronUpUtensils = datalistContainerUtensils.querySelector('.icon-chevron-up-utensils');
+const iconChevronDownUtensils = datalistContainerUtensils.querySelector('.icon-chevron-down-utensils');
+const datalistUtensils = datalistContainerUtensils.querySelector('ul');
 
 
 let initialRecipes = [];
@@ -25,7 +25,7 @@ let filteredRecipes = [];
 export const selectedTags = {
     ingredients: [],
     appliance: [],
-    ustensils: [],
+    utensils: [],
 };
 
 //---------------- Filters section -----------------
@@ -49,10 +49,10 @@ export const selectedTags = {
 //                     filteredRecipes.push(recipes[i]);
 //                 }
 //             }
-//         } else if (filterType === 'ustensils') {
+//         } else if (filterType === 'utensils') {
 //             for (let i = 0; i < recipes.length; i++) {
-//                 for (let j = 0; j < recipes[i].ustensils.length; j++) {
-//                     if (recipes[i].ustensils[j].toLowerCase().includes(tagLabel.toLowerCase())) {
+//                 for (let j = 0; j < recipes[i].utensils.length; j++) {
+//                     if (recipes[i].utensils[j].toLowerCase().includes(tagLabel.toLowerCase())) {
 //                         filteredRecipes.push(recipes[i]);
 //                         break;
 //                     }
@@ -83,7 +83,7 @@ export const selectedTags = {
 //                     }
 //                 }
 //             } else {
-//                 if (selectedTags['appliance'].length < 1 && selectedTags['ustensils'].length < 1) {
+//                 if (selectedTags['appliance'].length < 1 && selectedTags['utensils'].length < 1) {
 //                     filteredRecipes = [...initialRecipes];
 //                 } else {
 //                     // for (let i = 0; i < initialRecipes.length; i++) {
@@ -105,19 +105,19 @@ export const selectedTags = {
 //                     }
 //                 }
 //             } else {
-//                 if (selectedTags['ingredients'].length < 1 && selectedTags['ustensils'].length < 1) {
+//                 if (selectedTags['ingredients'].length < 1 && selectedTags['utensils'].length < 1) {
 //                     filteredRecipes = [...initialRecipes];
 //                 }
 //             }
 
-//         } else if (filterType === 'ustensils') {
+//         } else if (filterType === 'utensils') {
 
 //         	if (selectedTags[filterType].length > 0) {
 //                 for (let i = 0; i < initialRecipes.length; i++) {
-//                     for (let j = 0; j < initialRecipes[i].ustensils.length; j++) {
+//                     for (let j = 0; j < initialRecipes[i].utensils.length; j++) {
 //                         let isMatch = false;
 //                         for (let tag of selectedTags[filterType]) {
-//                             if (initialRecipes[i].ustensils[j].toLowerCase().includes(tag.toLowerCase())) {
+//                             if (initialRecipes[i].utensils[j].toLowerCase().includes(tag.toLowerCase())) {
 //                                 filteredRecipes.push(initialRecipes[i]);
 //                                 isMatch = true;
 //                                 break;
@@ -160,7 +160,7 @@ export const filteringRecipes = (recipes, tagLabel, tagStatus, filterType) => {
             const isMatch =
                 (filterType === 'ingredients' && recipe.ingredients.some(ingredient => isMatchingTag(ingredient.ingredient, [toLowerCaseTagLabel]))) ||
                 (filterType === 'appliance' && isMatchingTag(recipe.appliance, [toLowerCaseTagLabel])) ||
-                (filterType === 'ustensils' && recipe.ustensils.some(utensil => isMatchingTag(utensil, [toLowerCaseTagLabel])));
+                (filterType === 'utensils' && recipe.utensils.some(utensil => isMatchingTag(utensil, [toLowerCaseTagLabel])));
 
             if (isMatch) {
                 filteredRecipes.push(recipe);
@@ -176,7 +176,7 @@ export const filteringRecipes = (recipes, tagLabel, tagStatus, filterType) => {
         if (
             selectedTags.ingredients.length < 1 &&
             selectedTags.appliance.length < 1 &&
-            selectedTags.ustensils.length < 1
+            selectedTags.utensils.length < 1
         ) {
             filteredRecipes = [...initialRecipes];
         } else {
@@ -200,9 +200,9 @@ export const filteringRecipes = (recipes, tagLabel, tagStatus, filterType) => {
                     }
                 }
         
-                // Check for each tag in ustensils array
-                for (let tag of selectedTags.ustensils) {
-                    if (recipe.ustensils.some(utensil => isMatchingTag(utensil, [tag]))) {
+                // Check for each tag in utensils array
+                for (let tag of selectedTags.utensils) {
+                    if (recipe.utensils.some(utensil => isMatchingTag(utensil, [tag]))) {
                         isMatch = true;
                         break;
                     }
@@ -241,7 +241,7 @@ const init = async () => {
 
 	hideOrDisplayFilters(datalistIngredients, iconChevronUpIngredients, iconChevronDownIngredients);
 	hideOrDisplayFilters(datalistAppliance, iconChevronUpAppliance, iconChevronDownAppliance);
-	hideOrDisplayFilters(datalistUstensils, iconChevronUpUstensils, iconChevronDownUstensils);
+	hideOrDisplayFilters(datalistUtensils, iconChevronUpUtensils, iconChevronDownUtensils);
 };
 
 init();

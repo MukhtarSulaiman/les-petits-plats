@@ -2,7 +2,7 @@ import { createFactoryRecipes } from './factoryRecipes.js';
 import { createRecipes } from '../templates/recipesElements.js';
 import { uniquifyIgredients } from './uniquifyIgredients.js';
 import { uniquifyAppliance } from './uniquifyAppliance.js';
-import { uniquifyUstensils } from './uniquifyUstensils.js';
+import { uniquifyUtensils } from './uniquifyUtensils.js';
 
 const recipesContainer = document.getElementById('recipes-container');
 const alertMessage = document.getElementById('alert-message');
@@ -30,7 +30,7 @@ const displayRecipes = (recipes, searchValue) => {
     
     uniquifyIgredients(recipes);
     uniquifyAppliance(recipes);
-    uniquifyUstensils(recipes);
+    uniquifyUtensils(recipes);
 };
 
 export { displayRecipes };

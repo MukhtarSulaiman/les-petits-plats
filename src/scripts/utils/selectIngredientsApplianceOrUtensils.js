@@ -2,9 +2,9 @@ import { selectedTags, filteringRecipes, removeTags } from '../index.js';
 
 const ingredientTagsContainer = document.getElementById('ingredient-tags-container');
 const applianceTagsContainer = document.getElementById('appliance-tags-container');
-const ustensilTagsContainer = document.getElementById('ustensil-tags-container');
+const utensilTagsContainer = document.getElementById('utensil-tags-container');
 
-const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsContainer, filterType) => {
+const selectIngredientsApplianceOrUtensils = (recipes, datalistElement, tagsContainer, filterType) => {
 	Array.from(datalistElement.children).map((element) => {
 		element.addEventListener('mouseover', (event) => {
 			event.target.classList.add('bg-primary', 'cursor-pointer');
@@ -40,7 +40,7 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 				tagsContainer.appendChild(div);
 			}
             
-            if (!selectedTags[filterType].includes(currentTag.textContent) && filterType === 'ustensils') {
+            if (!selectedTags[filterType].includes(currentTag.textContent) && filterType === 'utensils') {
 				selectedTags[filterType].push(currentTag.textContent);
 				tagsContainer.appendChild(div);
 			}
@@ -57,8 +57,8 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 
 				filteringRecipes(recipes, currentTag.textContent, 'adding', filterType);
 				removeTags(recipes, removeTagButtons, filterType);
-			} else if (filterType === 'ustensils') {
-				const removeTagButtons = Array.from(ustensilTagsContainer.querySelectorAll('div>i'));
+			} else if (filterType === 'utensils') {
+				const removeTagButtons = Array.from(utensilTagsContainer.querySelectorAll('div>i'));
 
 				filteringRecipes(recipes, currentTag.textContent, 'adding', filterType);
 				removeTags(recipes, removeTagButtons, filterType);
@@ -67,4 +67,4 @@ const selectIngredientsApplianceOrUstensils = (recipes, datalistElement, tagsCon
 	});
 };
 
-export {selectIngredientsApplianceOrUstensils};
+export { selectIngredientsApplianceOrUtensils };

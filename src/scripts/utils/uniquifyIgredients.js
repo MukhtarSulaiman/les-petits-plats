@@ -1,4 +1,4 @@
-import { selectIngredientsApplianceOrUstensils } from './selectIngredientsApplianceOrUstensils.js'
+import { selectIngredientsApplianceOrUtensils } from './selectIngredientsApplianceOrUtensils.js'
 
 const datalistContainerIngredients = document.querySelector('.datalist-container-ingredients');
 const searchInput = datalistContainerIngredients.querySelector('input');
@@ -45,7 +45,7 @@ const displayIngredients = (recipes, uniqueIngredients) => {
         datalistIngredients.appendChild(li);
     }
 
-    selectIngredientsApplianceOrUstensils(recipes, datalistIngredients, ingredientTagsContainer, 'ingredients');
+    selectIngredientsApplianceOrUtensils(recipes, datalistIngredients, ingredientTagsContainer, 'ingredients');
 };
 
 export { uniquifyIgredients };
