@@ -1,9 +1,10 @@
 {
    "name": "les-petits-plats",
-   "version": "0.1.0",
-   "main": "index.html",
-   "scripts": {
-        "build:css": "npx tailwindcss -i ./src/assets/styles/input.css -o ./dist/output.css --watch --minify"
+    "version": "0.1.0",
+    "scripts": {
+        "build:css": "npx tailwindcss -i ./src/assets/styles/input.css -o ./dist/output.css --watch --minify",
+        "build:js": "cp ./src/scripts/*.js ./dist/",
+        "build": "npm run build:css && npm run build:js"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.16",
