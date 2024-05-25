@@ -1,7 +1,8 @@
 {
    "name": "les-petits-plats",
-    "version": "0.1.0",
-    "scripts": {
+   "version": "0.1.0",
+   "main": "index.html",
+   "scripts": {
         "build:css": "npx tailwindcss -i ./src/assets/styles/input.css -o ./dist/output.css --watch --minify"
     },
     "devDependencies": {
