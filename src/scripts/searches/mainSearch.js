@@ -23,20 +23,16 @@ const mainSearch = (recipes) => {
 		const filteredRecipes = [];
 
         if (mainSearchInputValue.length >= 3) {
-            for (let i = 0; i < recipes.length; i++) {
-                if (recipes[i].name.toLowerCase().includes(mainSearchInputValue)) {
-                    filteredRecipes.push(recipes[i]);
-                } else if (recipes[i].description.toLowerCase().includes(mainSearchInputValue)) {
-                    filteredRecipes.push(recipes[i]);
-                } else if (recipes[i].ingredients.length > 0) {
-                    for (let j = 0; j < recipes[i].ingredients.length; j++) {
-                        if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(mainSearchInputValue)) {
-                            filteredRecipes.push(recipes[i]);
-                            break;
-                        }
-                    }
+
+            const filteredRecipes = recipes.filter(recipe => {
+                if (recipe.name.toLowerCase().includes(mainSearchInputValue)) return recipe;
+                else if (recipe.description.toLowerCase().includes(mainSearchInputValue)) return recipe;
+                else if (recipe.ingredients) {
+                    return recipe.ingredients.forEach(ingredient => {
+                        if (ingredient.ingredient.toLowerCase().includes(mainSearchInputValue)) return recipe;
+                    });
                 }
-            }
+            });
             displayRecipes(filteredRecipes, mainSearchInputValue);
         }
 	});
