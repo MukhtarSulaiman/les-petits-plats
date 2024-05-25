@@ -34,60 +34,115 @@
 				<h1 class="font-anton text-center text-primary text-5xl uppercase leading-relaxed max-w-3xl">
 					Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses
 				</h1>
-				<div class="w-full max-w-4xl  mt-7 relative">
+				<div class="relative w-full max-w-4xl mt-7">
 					<input
-						class="w-full h-16 py-4 px-7 rounded-xl outline-0"
+						class="main-search-input w-full h-16 py-4 px-7 rounded-xl outline-0"
 						placeholder="Rechercher une recette, un ingrédient, ..."
 						type="text" />
 
-                    <div class="w-11 h-11 bg-black rounded-lg absolute right-4 top-2 flex justify-center items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 28 29" fill="none">
-                            <circle cx="10" cy="10.4219" r="9.5" stroke="white"/>
-                            <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="white"/>
+                    <div class="main-search-input_remove-icon w-fit absolute top-5 right-20 cursor-pointer hidden">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="gray">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
-                    </div>
+                    </div>   
+                    <svg 
+                        class="main-search-input_search-icon absolute right-4 top-2.5 bg-black hover:bg-primary text-white hover:text-black transition-all duration-300 w-11 h-11 p-2 rounded-lg cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 28 29" fill="none">
+                        <circle cx="10" cy="10.4219" r="9.5" stroke="currentColor"/>
+                        <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="currentColor"/>
+                    </svg>
                 </div>
              </div>
         </header>
         <!-- main section -->
-        <main class="p-10 bg-gray">
-            <div class="flex justify-between items-center flex-wrap gap-7">
-                <div class="w-96 h-auto bg-white rounded-2xl overflow-hidden">
-                    <img class="w-full h-64 object-cover" src="./assets/images/dishes/Recette01.jpg" alt="">
-                    <div class="px-5 py-6">
-                        <h2 class="text-lg font-anton">Limonade de Coco</h2>
-                        <div class="mt-5">
-                            <h3 class="uppercase font-medium opacity-60 mb-3">Recette</h3>
-                            <p class="font-light">Mettre les glaçons à votre goût dans le blender, Ajouter le lait  la crème de coco, le jus de 2 citrons et le sucre ensemble. Mixer jusqu'à obtenir la consistance désirée.</p>
+        <main class="relative p-10 bg-gray">
+            <!-- Recipes filters -->
+            <div class="flex justify-between items-center mb-10">
+                <div class="relative w-1/2 flex justify-between items-center">
+                    
+                    <div class="datalist-container-ingredients absolute top-0 left-0 z-20 w-48 !p-4 bg-white rounded-lg"> 
+                        <div class="flex justify-between">
+                            <label class="font-medium" for="ingredient">Ingédients</label>
+                            <svg class="icon-chevron-up-ingredients w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                            </svg>
+                            <svg  class="icon-chevron-down-ingredients w-6 h-6 hidden cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
                         </div>
-                        <div class="mt-5">
-                            <h3 class="uppercase font-medium opacity-60 mb-3">ingrédients</h3>
-                            <div class="w-full flex justify-between items-center flex-wrap gap-5">
-                                <div class="w-2/6">
-                                    <p class="font-light">Lait de coco</p>
-                                    <small class="opacity-60 text-base font-light">400ml</small>
-                                </div>
-                                <div class="w-2/6">
-                                    <p class="font-light">Jus de citron</p>
-                                    <small class="opacity-60 text-base font-light">2</small>
-                                </div>
-                                <div class="w-2/6">
-                                    <p class="font-light">Crème de coco</p>
-                                    <small class="opacity-60 text-base font-light">4 cuillères</small>
-                                </div>
-                                <div class="w-2/6">
-                                    <p class="font-light">Sucre</p>
-                                    <small class="opacity-60 text-base font-light">20g</small>
-                                </div>
-                                <div class="w-2/6">
-                                    <p class="font-light">Glaçons</p>
-                                    <small class="opacity-60 text-base font-light">2</small>
-                                </div>
+                        <div class="hidden">
+                            <div class="relative mt-3 h-fit">
+                                <input class="w-full outline-none p-1 border border-gray" type="text" id="ingredient" />
+                                <svg class="absolute top-3 right-3 font-light" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 28 29" fill="none">
+                                    <circle cx="10" cy="10.4219" r="9.5" stroke="gray"/>
+                                    <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="gray"/>
+                                </svg>                     
                             </div>
+                            <ul class="mt-4 max-h-52 overflow-scroll" id="ingredients"></ul>
                         </div>
                     </div>
+
+                    <div class="datalist-container-appliance absolute top-0 left-1/2 transform -translate-x-1/2 z-20 w-48 !p-4 bg-white rounded-lg"> 
+                        <div class="flex justify-between">
+                            <label class="font-medium" for="appliance">Appareils</label>
+                            <svg class="icon-chevron-up-appliance w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                            </svg>
+                            <svg  class="icon-chevron-down-appliance w-6 h-6 hidden cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                        <div class="hidden">
+                            <div class="relative mt-3 h-fit">
+                                <input class="w-full outline-none p-1 border border-gray" type="text" id="appliance" />
+                                <svg class="absolute top-3 right-3 font-light" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 28 29" fill="none">
+                                    <circle cx="10" cy="10.4219" r="9.5" stroke="gray"/>
+                                    <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="gray"/>
+                                </svg>                     
+                            </div>
+                            <ul class="mt-4 max-h-52 overflow-scroll" id="appliance"></ul>
+                        </div>
+                    </div>
+
+                    <div class="datalist-container-utensils absolute top-0 right-0 z-20 w-48 !p-4 bg-white rounded-lg"> 
+                        <div class="flex justify-between">
+                            <label class="font-medium" for="ingredient">Ustensiles</label>
+                            <svg class="icon-chevron-up-utensils w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                            </svg>
+                            <svg  class="icon-chevron-down-utensils w-6 h-6 hidden cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                        <div class="hidden">
+                            <div class="relative mt-3 h-fit">
+                                <input class="w-full outline-none p-1 border border-gray" type="text" id="utensils" />
+                                <svg class="absolute top-3 right-3 font-light" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 28 29" fill="none">
+                                    <circle cx="10" cy="10.4219" r="9.5" stroke="gray"/>
+                                    <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="gray"/>
+                                </svg>                     
+                            </div>
+                            <ul class="mt-4 max-h-52 overflow-scroll" id="utensils"></ul>
+                        </div>
+                    </div>
+                     <!-- Tags section -->
+                    <div id="ingredient-tags-container" class="w-48 absolute top-16 z-10"></div>
+                    <div id="appliance-tags-container" class="w-48 absolute top-16 left-1/2 transform -translate-x-1/2 mx-auto z-10"></div>
+                    <div id="utensil-tags-container" class="w-48 absolute top-16 right-0 mx-auto z-10"></div>
                 </div>
+                <h2 class="totale-recipes-available text-xl font-anton"><span>0</span> recettes</h2>
             </div>
+            <!-- Recipes cards -->
+            <div 
+                id="recipes-container"
+                class="recipes-container mt-24 flex justify-center lg:justify-between items-start flex-wrap gap-7">
+            </div>
+            <div id="alert-message" class="hidden w-full h-60 justify-center items-center text-balck"></div>
         </main>
+
+        <script src="./scripts/index.js" type="module"></script>
+        <script src="./scripts/utils/displayRecipes.js" type="module"></script>
+        <script src="./scripts/utils/uniquifyIgredients.js" type="module"></script>
+        <script src="./scripts/searches/mainSearch.js" type="module"></script>
 	</body>
 </html>
