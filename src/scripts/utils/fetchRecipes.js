@@ -1,6 +1,6 @@
 const fetchRecipes = async () => {
     try {
-        const response = await fetch('./data/recipes.json');
+        const response = await fetch('./src/data/recipes.json');
 
         if (!response.ok) {
             throw new Error('Un problème est survenu lors de la récupération des données');
