@@ -2,7 +2,7 @@
    "name": "les-petits-plats",
     "version": "0.1.0",
     "scripts": {
-        "build:css": "npx tailwindcss -i ./src/assets/styles/input.css -o ./dist/output.css --watch --minify"
+        "build:css": "npx tailwindcss -i /src/assets/styles/input.css -o ./dist/output.css --watch --minify"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.16",
